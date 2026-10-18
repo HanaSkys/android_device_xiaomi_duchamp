@@ -1,0 +1,26 @@
+# Audio
+ro.audio.flinger_standbytime_ms=2000
+ro.audio.usb.period_us=16000
+
+# Bluetooth
+persist.bluetooth.a2dp_offload.coex_buf_count=3
+persist.bluetooth.a2dp_offload.disabled=false
+
+# Radio
+ro.fota.oem=Xiaomi
+ro.mi.os.soc.vendor=mtk
+ro.vendor.mtk_cta_set=1
+ro.vendor.mtk_gwsd_support=1
+ro.vendor.mtk_telephony_add_on_policy=0
+ro.vendor.vodata_support=1
+vendor.rild.libargs=-d /dev/ttyC0
+vendor.rild.libpath=mtk-ril.so
+
+# Media
+media.stagefright.thumbnail.prefer_hw_codecs=true
+
+# Verison
+ro.mi.os.version.code=3
+ro.mi.os.version.incremental=OS3.0.9.0.WNLMIXM
+ro.miui.build.region=global
+ro.product.marketname=POCO X6 Pro 5G

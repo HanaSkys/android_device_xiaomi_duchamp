@@ -1,0 +1,33 @@
+# Charger
+persist.vendor.accelerate.charge=true
+
+# Display
+persist.vendor.dc_backlight.enable=false
+ro.vendor.cabc.enable=false
+ro.vendor.display.all_modes_support_WCG.enable=true
+ro.vendor.display.update_gray_by_temperature=true
+ro.vendor.displayfeature.dump=true
+ro.vendor.histogram.enable=1
+ro.vendor.localhbm.enable=true
+ro.vendor.mi_sf.hdr_enable_flatmode=true
+ro.vendor.mtk.pq.aidl=true
+ro.vendor.mtk.pq.odm=true
+ro.vendor.sre.enable=false
+sys.displayfeature_hidl=false
+vendor.displayfeature.entry.enable=true
+
+# Radio
+persist.vendor.radio.dynamic_sar=1
+
+# Sensors
+persist.vendor.sensor.powbrightness=400
+persist.vendor.sensor.mischeck=true
+persist.vendor.sensor.maxbrightness=8191
+persist.vendor.debug.collision.dfx=true
+
+# Thermal
+persist.vendor.tracking.dfs=true
+
+# SKUs
+ro.product.property_source_order=odm,vendor,product,system_ext,system
+import /odm/etc/duchamp_${ro.boot.hwc}.prop

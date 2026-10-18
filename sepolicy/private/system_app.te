@@ -1,0 +1,26 @@
+# UEventObserver socket for TurboChargingService
+allow system_app self:netlink_kobject_uevent_socket { create bind read setopt getopt };
+
+# Thermal & FPS / CPU stats access
+allow system_app sysfs_thermal:dir r_dir_perms;
+allow system_app sysfs_thermal:file rw_file_perms;
+allow system_app proc_stat:file r_file_perms;
+
+# System properties
+set_prop(system_app, exported_system_prop)
+set_prop(system_app, system_prop)
+
+# Services required by XiaomiParts
+allow system_app {
+    batteryproperties_service
+    batterystats_service
+    vendor_perf_service
+    vibrator_manager_service
+     device_state_service
+    game_service
+    gpu_service
+    hint_service
+    media_session_service
+    sensorservice_service
+    thermal_service
+}:service_manager find;

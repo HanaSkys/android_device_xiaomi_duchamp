@@ -1,0 +1,50 @@
+# Audio
+/data/vendor/audio(/.*)?                                                                               u:object_r:mtk_audiohal_data_file:s0
+/dev/socket/audio_hw_socket                                                                            u:object_r:audio_socket:s0
+/dev/xlog                                                                                              u:object_r:audio_device:s0
+
+# Batterysecret
+/(vendor|system/vendor)/bin/batterysecret                                                              u:object_r:vendor_batterysecret_exec:s0
+
+# Display
+/(vendor|system/vendor)/bin/displayfeature                                                             u:object_r:vendor_displayfeature_exec:s0
+/(vendor|system/vendor)/bin/hw/vendor\.xiaomi\.hardware\.displayfeature_aidl-service                   u:object_r:vendor_hal_displayfeature_default_exec:s0
+/dev/mi_display/disp_feature                                                                           u:object_r:vendor_displayfeature_device:s0
+/data/vendor/display(/.*)?                                                                             u:object_r:vendor_display_data_file:s0
+/mnt/vendor/persist/display(/.*)?                                                                      u:object_r:vendor_persist_display_file:s0
+
+# Fingerprint
+/dev/xiaomi-fp                                                                                         u:object_r:fingerprint_device:s0
+/data/vendor/fpc(/.*)?                                                                                 u:object_r:fingerprint_vendor_data_file:s0
+/mnt/vendor/persist/fpc(/.*)?                                                                          u:object_r:fingerprint_vendor_data_file:s0
+/(vendor|system/vendor)/bin/hw/android\.hardware\.biometrics\.fingerprint-service\.xiaomi              u:object_r:hal_fingerprint_default_exec:s0
+
+# Mfido
+/(odm|vendor/odm|system/vendor)/bin/fidoca_mitee                                                       u:object_r:hal_mfidoca_default_exec:s0
+
+# Mlipay
+/(odm|vendor/odm|system/vendor)/bin/mlipayd_mitee                                                      u:object_r:hal_mlipay_default_exec:s0
+
+# Mtdservice
+/(odm|vendor/odm|system/vendor)/bin/mtd_mitee                                                          u:object_r:hal_mtdservice_default_exec:s0
+
+# Sensors
+/dev/elliptic0                                                                                         u:object_r:sensors_device:s0
+/(vendor|system/vendor)/bin/hw/android\.hardware\.sensors-service\.xiaomi-multihal                     u:object_r:hal_sensors_default_exec:s0
+/(vendor|system/vendor)/bin/sensor-notifier                                                            u:object_r:vendor_sensor_notifier_exec:s0
+/(odm|vendor/odm|system/vendor)/bin/hw/vendor.xiaomi.sensor.citsensorservice.aidl                      u:object_r:hal_sensors_default_exec:s0
+
+# Touch
+/dev/xiaomi-touch                                                                                      u:object_r:touchfeature_device:s0
+/(vendor|system/vendor)/bin/hw/vendor\.lineage\.touch-service\.xiaomi                                  u:object_r:hal_lineage_touch_default_exec:s0
+
+# Thermal
+/(vendor|system/vendor)/bin/mi_thermald                                                                u:object_r:vendor_mi_thermald_exec:s0
+
+# Charge Speed Limit
+/sys/devices/platform/11f01000\.i2c/i2c-5/5-0034/11f01000\.i2c:mt6375@34:mtk-gauge/power_supply/battery/constant_charge_current u:object_r:sysfs_power_supply:s0
+/sys/devices/platform/charger/power_supply/usb/online u:object_r:sysfs_power_supply:s0
+/sys/devices/platform/11b72000\.i2c/i2c-10/10-0055/power_supply/bms/fastcharge_mode u:object_r:sysfs_power_supply:s0
+/sys/class/power_supply/battery/constant_charge_current u:object_r:sysfs_power_supply:s0
+/sys/class/power_supply/usb/online u:object_r:sysfs_power_supply:s0
+/sys/class/power_supply/bms/fastcharge_mode u:object_r:sysfs_power_supply:s0
