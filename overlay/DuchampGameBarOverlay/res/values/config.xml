@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="config_gpu_usage_path" translatable="false">/sys/kernel/ged/hal/gpu_utilization</string>
+    <string name="config_gpu_clock_path" translatable="false">/sys/kernel/ged/hal/current_freqency</string>
+    <integer name="config_gpu_clock_divider">1000</integer>
+    <string name="config_ram_freq_path" translatable="false">/sys/class/devfreq/mtk-dvfsrc-devfreq/cur_freq</string>
+    <integer name="config_ram_freq_divider">1000000</integer>
+</resources>

@@ -1,0 +1,4 @@
+# GameBar: read-only access to MediaTek stats nodes
+r_dir_file(gamebar_app, sysfs_therm)
+r_dir_file(gamebar_app, sysfs_dvfsrc_devfreq)
+r_dir_file(gamebar_app, sysfs_ged)
