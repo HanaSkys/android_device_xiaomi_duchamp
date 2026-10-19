@@ -319,3 +319,5 @@ on property:vendor.mtk.md1.status=reset
 on boot
     chown system system /sys/kernel/ged/hal/gpu_utilization
     chmod 0440 /sys/kernel/ged/hal/gpu_utilization
+    chown system system /sys/kernel/ged/hal/current_freqency
+    chmod 0440 /sys/kernel/ged/hal/current_freqency
