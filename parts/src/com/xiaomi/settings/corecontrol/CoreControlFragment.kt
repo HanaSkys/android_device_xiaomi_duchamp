@@ -5,13 +5,17 @@
 package com.xiaomi.settings.corecontrol
 
 import android.content.SharedPreferences
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.view.View
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragment
 import androidx.preference.PreferenceManager
 import androidx.preference.SwitchPreferenceCompat
 import com.xiaomi.settings.R
 import com.xiaomi.settings.utils.FileUtils
+import com.xiaomi.settings.utils.M3CardItemDecoration
 
 class CoreControlFragment : PreferenceFragment(), Preference.OnPreferenceChangeListener {
 
@@ -48,6 +52,13 @@ class CoreControlFragment : PreferenceFragment(), Preference.OnPreferenceChangeL
         }
 
         syncFromSysfs()
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setDivider(ColorDrawable(Color.TRANSPARENT))
+        setDividerHeight(0)
+        listView?.addItemDecoration(M3CardItemDecoration(activity))
     }
 
     override fun onResume() {
