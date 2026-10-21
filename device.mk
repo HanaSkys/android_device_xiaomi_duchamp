@@ -248,6 +248,7 @@ PRODUCT_PACKAGES += \
     DuchampSettingsProviderOverlayPoco \
     DuchampSettingsProviderOverlayRedmi \
     DuchampGameBarOverlay \
+    DuchampMaintainerOverlay \
     DuchampSystemUIOverlay \
     DuchampWifiOverlay
 
