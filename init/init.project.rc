@@ -31,13 +31,16 @@ on post-fs-data
 
     # Charge Speed Limit permissions and SELinux restorecon
     chown system system /sys/class/power_supply/battery/constant_charge_current
+    chown system system /sys/class/power_supply/battery/smart_chg
     chmod 0664 /sys/class/power_supply/battery/constant_charge_current
+    chmod 0664 /sys/class/power_supply/battery/smart_chg
     chown system system /sys/class/power_supply/usb/online
     chmod 0664 /sys/class/power_supply/usb/online
     chown system system /sys/class/power_supply/bms/fastcharge_mode
     chmod 0664 /sys/class/power_supply/bms/fastcharge_mode
 
     restorecon /sys/devices/platform/11f01000.i2c/i2c-5/5-0034/11f01000.i2c:mt6375@34:mtk-gauge/power_supply/battery/constant_charge_current
+    restorecon /sys/devices/platform/11f01000.i2c/i2c-5/5-0034/11f01000.i2c:mt6375@34:mtk-gauge/power_supply/battery/smart_chg
     restorecon /sys/devices/platform/charger/power_supply/usb/online
     restorecon /sys/devices/platform/11b72000.i2c/i2c-10/10-0055/power_supply/bms/fastcharge_mode
 

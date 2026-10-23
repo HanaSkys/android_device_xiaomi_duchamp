@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    android:title="@string/bypass_charging_title">
+
+    <com.android.settingslib.widget.MainSwitchPreference
+        android:key="bypass_charging_enable"
+        android:title="@string/bypass_charging_enable_title"
+        android:persistent="false" />
+
+    <Preference
+        android:key="bypass_charging_info"
+        android:summary="@string/bypass_charging_info"
+        android:selectable="false" />
+</PreferenceScreen>

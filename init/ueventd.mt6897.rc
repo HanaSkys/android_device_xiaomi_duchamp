@@ -93,9 +93,11 @@
 # Charger
 /sys/class/power_supply/battery input_suspend 0660 system system
 /sys/class/power_supply/battery constant_charge_current 0664 system system
+/sys/class/power_supply/battery smart_chg 0664 system system
 /sys/class/power_supply/usb online 0664 system system
 /sys/class/power_supply/bms fastcharge_mode 0664 system system
 /sys/devices/platform/11f01000.i2c/i2c-5/5-0034/11f01000.i2c:mt6375@34:mtk-gauge/power_supply/battery constant_charge_current 0664 system system
+/sys/devices/platform/11f01000.i2c/i2c-5/5-0034/11f01000.i2c:mt6375@34:mtk-gauge/power_supply/battery smart_chg 0664 system system
 /sys/devices/platform/charger/power_supply/usb online 0664 system system
 /sys/devices/platform/11b72000.i2c/i2c-10/10-0055/power_supply/bms fastcharge_mode 0664 system system
 

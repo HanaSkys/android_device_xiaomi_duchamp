@@ -65,4 +65,10 @@
     <string name="turbo_charge_footer_note">Lower charging wattages reduce heat generation and help preserve long-term battery health.</string>
     <string name="turbo_charge_tile_label">Charge Speed Limit</string>
     <string name="turbo_charge_tile_content_description">Toggle Charge Speed Limit</string>
+
+    <!-- Bypass charging -->
+    <string name="bypass_charging_title">Bypass charging</string>
+    <string name="bypass_charging_summary">Power the device directly from the charger</string>
+    <string name="bypass_charging_enable_title">Use bypass charging</string>
+    <string name="bypass_charging_info" formatted="false">While the charger is connected, the battery stops charging and the device runs from the charger, reducing heat while gaming. Below 20% the battery charges normally, and if it drops to 15% charging resumes automatically.</string>
 </resources>
