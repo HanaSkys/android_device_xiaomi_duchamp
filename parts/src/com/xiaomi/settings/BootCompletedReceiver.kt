@@ -62,6 +62,12 @@ class BootCompletedReceiver : BroadcastReceiver() {
         // Start TurboChargingService
         val turboChargingIntent = Intent(context, TurboChargingService::class.java)
         context.startService(turboChargingIntent)
+
+        // Bypass charging
+        context.startService(Intent(context, com.xiaomi.settings.bypass.BypassChargingService::class.java))
+
+        // High touch polling rate (re-apply after screen on)
+        context.startService(Intent(context, com.xiaomi.settings.touch.HighTouchPollingService::class.java))
     }
 
     private fun restoreThermalProfile(context: Context) {
