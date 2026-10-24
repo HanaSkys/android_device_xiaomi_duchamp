@@ -27,12 +27,19 @@ import java.util.Calendar
  * charger keeps powering the device, and resumes at threshold - 5%.
  *
  * Priority: bypass charging (20%) > min(custom limit, smart charging 80%).
+ *
+ * The driver's hold is edge-triggered (monitor_smart_chg): it stops charging
+ * once and marks the mode active, but a later re-enable of the charger (plug-in,
+ * charger type re-detection, PD/PE negotiation) is not undone while it stays
+ * active. Writing the mode again clears that flag, so the hold is re-armed on
+ * plug-in and whenever the battery is seen charging above the threshold.
  */
 class ChargeControlService : Service() {
 
     private val handler = Handler(Looper.getMainLooper())
     private var lastValue = -1
     private var pendingValue = -1
+    private var lastRearm = 0L
 
     private val observer = object : ContentObserver(handler) {
         override fun onChange(selfChange: Boolean) {
@@ -42,9 +49,30 @@ class ChargeControlService : Service() {
 
     private val receiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context, intent: Intent) {
-            update()
+            if (intent.action == Intent.ACTION_BATTERY_CHANGED) {
+                checkHoldLeak(intent)
+                return
+            }
+            handler.removeCallbacks(deferredUpdate)
+            if (intent.action == Intent.ACTION_POWER_CONNECTED) {
+                update()
+                // The charger re-enables charging while PD/PE negotiation settles.
+                handler.removeCallbacks(rearm)
+                REARM_AFTER_PLUG_MS.forEach { handler.postDelayed(rearm, it) }
+            } else if (intent.action == Intent.ACTION_POWER_DISCONNECTED) {
+                // PD chargers renegotiate (brief VBUS drop) while charging is held.
+                // Reacting at once would release the hold and let the charge pump
+                // run at full power until the charger comes back, so wait first.
+                handler.postDelayed(deferredUpdate, UNPLUG_DEBOUNCE_MS)
+            } else {
+                update()
+            }
         }
     }
+
+    private val deferredUpdate = Runnable { update() }
+
+    private val rearm = Runnable { rearmHold("plug-in") }
 
     private val applyPending = Runnable { writeSmartChg(pendingValue) }
 
@@ -60,6 +88,7 @@ class ChargeControlService : Service() {
         val filter = IntentFilter().apply {
             addAction(Intent.ACTION_POWER_CONNECTED)
             addAction(Intent.ACTION_POWER_DISCONNECTED)
+            addAction(Intent.ACTION_BATTERY_CHANGED)
             addAction(Intent.ACTION_TIME_TICK)
             addAction(AlarmManager.ACTION_NEXT_ALARM_CLOCK_CHANGED)
         }
@@ -97,10 +126,14 @@ class ChargeControlService : Service() {
     }
 
     private fun targetThreshold(): Int? {
-        val plugged = isPlugged()
-        if (plugged && (getSecure(KEY_BYPASS) == 1 || getSecure(KEY_BYPASS_GAME) == 1)) {
+        // Bypass stays armed regardless of plug state: unplugged it does nothing,
+        // and the driver holds charging the moment a charger shows up, with no
+        // full-power window while the service catches up with the plug event.
+        if (getSecure(KEY_BYPASS) == 1 || getSecure(KEY_BYPASS_GAME) == 1) {
             return BYPASS_THRESHOLD
         }
+
+        val plugged = isPlugged()
 
         var threshold: Int? = null
         if (getSecure(KEY_LIMIT_ENABLED) == 1) {
@@ -130,6 +163,36 @@ class ChargeControlService : Service() {
         }
     }
 
+    private fun armedThreshold(): Int? {
+        if (lastValue == -1 || lastValue == VALUE_DISABLE || lastValue != pendingValue) return null
+        return lastValue shr 16
+    }
+
+    /**
+     * Writes the current mode again (never the disable value), which only clears
+     * the driver's active flag so it stops charging again. Idempotent while held.
+     */
+    private fun rearmHold(reason: String) {
+        if (armedThreshold() == null) return
+        lastRearm = System.currentTimeMillis()
+        Log.i(TAG, "re-arming hold ($reason)")
+        writeSmartChg(lastValue)
+    }
+
+    private fun checkHoldLeak(intent: Intent) {
+        val threshold = armedThreshold() ?: return
+        if (intent.getIntExtra(BatteryManager.EXTRA_PLUGGED, 0) == 0) return
+        val level = intent.getIntExtra(BatteryManager.EXTRA_LEVEL, -1)
+        val scale = intent.getIntExtra(BatteryManager.EXTRA_SCALE, 100)
+        if (level < 0 || scale <= 0 || level * 100 / scale <= threshold) return
+        if (System.currentTimeMillis() - lastRearm < REARM_MIN_INTERVAL_MS) return
+
+        val currentUa = getSystemService(BatteryManager::class.java)
+            ?.getIntProperty(BatteryManager.BATTERY_PROPERTY_CURRENT_NOW) ?: return
+        if (currentUa == Int.MIN_VALUE || currentUa < LEAK_CURRENT_UA) return
+        rearmHold("charging at ${currentUa / 1000} mA above $threshold%")
+    }
+
     private fun writeSmartChg(value: Int) {
         try {
             File(SMART_CHG_PATH).writeText(value.toString())
@@ -146,6 +209,8 @@ class ChargeControlService : Service() {
 
     override fun onDestroy() {
         handler.removeCallbacks(applyPending)
+        handler.removeCallbacks(deferredUpdate)
+        handler.removeCallbacks(rearm)
         contentResolver.unregisterContentObserver(observer)
         unregisterReceiver(receiver)
         super.onDestroy()
@@ -173,6 +238,10 @@ class ChargeControlService : Service() {
         private const val BYPASS_THRESHOLD = 20
         private const val SMART_THRESHOLD = 80
         private const val THRESHOLD_SWITCH_DELAY_MS = 2500L
+        private const val UNPLUG_DEBOUNCE_MS = 10_000L
+        private val REARM_AFTER_PLUG_MS = longArrayOf(5_000L, 20_000L)
+        private const val REARM_MIN_INTERVAL_MS = 20_000L
+        private const val LEAK_CURRENT_UA = 300_000      // > 300 mA into the battery
 
         private const val SMART_START_HOUR = 22
         private const val DEFAULT_WINDOW_MS = 8 * 60 * 60 * 1000L      // 22:00 -> 06:00
