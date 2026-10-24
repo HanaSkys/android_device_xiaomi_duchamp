@@ -63,8 +63,8 @@ class BootCompletedReceiver : BroadcastReceiver() {
         val turboChargingIntent = Intent(context, TurboChargingService::class.java)
         context.startService(turboChargingIntent)
 
-        // Bypass charging
-        context.startService(Intent(context, com.xiaomi.settings.bypass.BypassChargingService::class.java))
+        // Charging control (bypass, charging limit, smart charging)
+        context.startService(Intent(context, com.xiaomi.settings.batteryhealth.ChargeControlService::class.java))
 
         // High touch polling rate (re-apply after screen on)
         context.startService(Intent(context, com.xiaomi.settings.touch.HighTouchPollingService::class.java))

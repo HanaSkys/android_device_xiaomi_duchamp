@@ -66,9 +66,38 @@
     <string name="turbo_charge_tile_label">Charge Speed Limit</string>
     <string name="turbo_charge_tile_content_description">Toggle Charge Speed Limit</string>
 
-    <!-- Bypass charging -->
+    <!-- Battery health -->
+    <string name="battery_health_title">Battery health</string>
+    <string name="battery_health_summary">Maximum capacity, smart charging and charging limit</string>
+    <string name="battery_health_status_title">Battery status</string>
+    <string name="battery_health_capacity_title">Maximum capacity</string>
+    <string name="battery_health_cycles_title">Charge cycles</string>
+    <string name="battery_health_capacity_info">An estimate of the current battery capacity compared to when it was new, as reported by the battery fuel gauge. A lower value means less usage time between charges.</string>
+    <string name="battery_health_unknown">Unavailable</string>
+    <string name="battery_health_charging_title">Charging</string>
+    <string name="smart_charging_title">Smart charging</string>
+    <string name="smart_charging_summary" formatted="false">Overnight (from 22:00), charging pauses at 80% and finishes one hour before your next alarm, or at 06:00 if no alarm is set.</string>
+    <string name="charge_limit_title">Custom charging limit</string>
+    <string name="charge_limit_summary" formatted="false">Stop charging at the selected level. The device keeps running from the charger, and charging resumes when the battery drops 5% below the limit.</string>
+    <string name="charge_limit_value_title" formatted="false">Charging limit (%)</string>
+    <string name="battery_health_gaming_title">Gaming</string>
     <string name="bypass_charging_title">Bypass charging</string>
-    <string name="bypass_charging_summary">Power the device directly from the charger</string>
-    <string name="bypass_charging_enable_title">Use bypass charging</string>
     <string name="bypass_charging_info" formatted="false">While the charger is connected, the battery stops charging and the device runs from the charger, reducing heat while gaming. Below 20% the battery charges normally, and if it drops to 15% charging resumes automatically.</string>
+    <!-- Battery health redesign -->
+    <string name="battery_health_unknown_short">—</string>
+    <string name="battery_health_good">Good</string>
+    <string name="battery_health_fair">Fair</string>
+    <string name="battery_health_poor">Replace soon</string>
+    <string name="battery_health_condition_title">Condition</string>
+    <string name="battery_health_temperature_title">Temperature</string>
+    <string name="battery_health_temperature_value">%1$.1f °C</string>
+    <string name="battery_state_on_battery">On battery</string>
+    <string name="battery_state_charging">Charging</string>
+    <string name="battery_state_full">Fully charged</string>
+    <string name="battery_state_paused">Charging paused at %1$d%%</string>
+    <string name="battery_state_bypass">Bypass charging active</string>
+    <string name="smart_charging_summary_short" formatted="false">Pause at 80% overnight, full before your alarm</string>
+    <string name="charge_limit_summary_short">Stop charging at the selected level</string>
+    <string name="bypass_charging_summary_short">Run from the charger while gaming</string>
+    <string name="battery_health_charging_footer" formatted="false">Smart charging pauses at 80% from 22:00 and finishes one hour before your next alarm (06:00 without an alarm). With a custom limit, charging stops at the selected level and resumes 5% below it. In both cases the device keeps running from the charger.</string>
 </resources>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:title="@string/battery_health_title">
+
+    <com.xiaomi.settings.batteryhealth.BatteryHealthHeaderPreference
+        android:key="battery_health_header" />
+
+    <PreferenceCategory
+        android:key="battery_health_charging"
+        android:title="@string/battery_health_charging_title">
+
+        <SwitchPreferenceCompat
+            android:key="smart_charging"
+            android:icon="@drawable/ic_bh_smart_charging"
+            android:title="@string/smart_charging_title"
+            android:summary="@string/smart_charging_summary_short"
+            android:persistent="false" />
+
+        <SwitchPreferenceCompat
+            android:key="charge_limit_enabled"
+            android:icon="@drawable/ic_bh_charge_limit"
+            android:title="@string/charge_limit_title"
+            android:summary="@string/charge_limit_summary_short"
+            android:persistent="false" />
+
+        <SeekBarPreference
+            android:key="charge_limit"
+            android:title="@string/charge_limit_value_title"
+            android:dependency="charge_limit_enabled"
+            android:max="100"
+            android:persistent="false"
+            app:min="70"
+            app:seekBarIncrement="5"
+            app:showSeekBarValue="true" />
+
+        <com.android.settingslib.widget.FooterPreference
+            android:key="battery_health_charging_footer"
+            android:title="@string/battery_health_charging_footer"
+            android:selectable="false" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="battery_health_gaming"
+        android:title="@string/battery_health_gaming_title">
+
+        <SwitchPreferenceCompat
+            android:key="bypass_charging"
+            android:icon="@drawable/ic_bh_bypass"
+            android:title="@string/bypass_charging_title"
+            android:summary="@string/bypass_charging_summary_short"
+            android:persistent="false" />
+
+        <com.android.settingslib.widget.FooterPreference
+            android:key="battery_health_gaming_footer"
+            android:title="@string/bypass_charging_info"
+            android:selectable="false" />
+    </PreferenceCategory>
+</PreferenceScreen>
