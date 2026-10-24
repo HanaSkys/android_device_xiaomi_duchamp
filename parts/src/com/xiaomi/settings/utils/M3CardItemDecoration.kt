@@ -72,9 +72,15 @@ class M3CardItemDecoration(private val context: Context) : RecyclerView.ItemDeco
                 else                 -> R.drawable.bg_m3_card_bottom
             }
 
-            if (view.tag != bgRes) {
+            // PreferenceViewHolder.resetState() restores the original background on every
+            // rebind (e.g. notifyChanged()), so a cached resource id alone is not enough:
+            // re-apply whenever the view no longer holds the drawable we set.
+            if (view.getTag(R.id.m3_card_bg_res) != bgRes ||
+                view.getTag(R.id.m3_card_bg_drawable) !== view.background
+            ) {
                 view.setBackgroundResource(bgRes)
-                view.tag = bgRes
+                view.setTag(R.id.m3_card_bg_res, bgRes)
+                view.setTag(R.id.m3_card_bg_drawable, view.background)
             }
         }
     }

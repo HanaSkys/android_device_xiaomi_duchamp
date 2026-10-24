@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="m3_card_bg_res" type="id" />
+    <item name="m3_card_bg_drawable" type="id" />
+</resources>
