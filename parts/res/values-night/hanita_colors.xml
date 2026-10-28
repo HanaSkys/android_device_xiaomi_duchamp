@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: 2026 HanaSkys
+     SPDX-License-Identifier: Apache-2.0
+-->
+<!-- Hanita Mods "Sakura" palette - night -->
+<resources>
+    <color name="hub_bg">#FF120B10</color>
+    <color name="hub_card">#FF1E141B</color>
+    <color name="hub_card_stroke">#FF3A2532</color>
+    <color name="hub_card_shadow">#00000000</color>
+    <color name="hub_ripple">#33FF8FB8</color>
+    <color name="hub_text">#FFFBEAF1</color>
+    <color name="hub_text_secondary">#FFC6A8B6</color>
+    <color name="hub_accent">#FFFF8FB8</color>
+    <color name="hub_accent_soft">#FF3D1F2F</color>
+    <color name="hub_good">#FFFF8FB8</color>
+    <color name="hub_fair">#FFFFC861</color>
+    <color name="hub_poor">#FFFF7A70</color>
+    <color name="hub_ring_track">#FF34222C</color>
+
+    <color name="hub_hero_start">#FF3B1230</color>
+    <color name="hub_hero_center">#FF6E1F4B</color>
+    <color name="hub_hero_end">#FF2A1A4A</color>
+    <color name="hub_hero_text">#FFFFF0F6</color>
+    <color name="hub_hero_text_secondary">#BFFFF0F6</color>
+    <color name="hub_hero_flower">#26FFB3CE</color>
+    <color name="hub_petal">#FFFFA6C6</color>
+    <color name="hub_chip_bg">#26FFFFFF</color>
+    <color name="hub_chip_text">#FFFFE3EE</color>
+
+    <color name="hub_toggle_track_off">#FF2A1C24</color>
+    <color name="hub_toggle_outline">#FF8C6A7B</color>
+    <color name="hub_toggle_thumb_off">#FF8C6A7B</color>
+    <color name="hub_toggle_thumb_on">#FF3D0F24</color>
+
+    <bool name="hub_light_bars">false</bool>
+</resources>

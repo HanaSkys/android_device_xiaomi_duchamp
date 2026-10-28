@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: 2026 HanaSkys
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <string name="hanita_hub_summary">Batería, carga y touch</string>
+    <string name="hub_subtitle">Extras hechos a mano para tu teléfono</string>
+    <string name="hub_back">Atrás</string>
+    <string name="hub_section_battery">Batería</string>
+    <string name="hub_section_touch">Pantalla y touch</string>
+    <string name="hub_capacity_label">Capacidad máxima</string>
+    <string name="hub_stat_cycles">Ciclos de carga</string>
+    <string name="hub_stat_temp">Temperatura</string>
+    <string name="hub_stat_condition">Estado</string>
+    <string name="hub_health_good">Buena</string>
+    <string name="hub_health_fair">Regular</string>
+    <string name="hub_health_poor">Cámbiala pronto</string>
+    <string name="hub_health_explain">Estimación de la capacidad actual de la batería comparada con cuando era nueva, según el medidor de carga. Un valor más bajo significa menos tiempo de uso entre cargas.</string>
+    <string name="hub_state_on_battery">Usando batería</string>
+    <string name="hub_state_charging">Cargando</string>
+    <string name="hub_state_full">Carga completa</string>
+    <string name="hub_state_paused">Carga en pausa al %1$d%%</string>
+    <string name="hub_state_bypass">Carga bypass activa</string>
+    <string name="hub_bypass_title">Carga bypass</string>
+    <string name="hub_bypass_on_plugged">El cargador alimenta el teléfono directo</string>
+    <string name="hub_bypass_on_unplugged">Listo · conecta el cargador</string>
+    <string name="hub_off">Desactivado</string>
+    <string name="hub_smart_title">Carga inteligente</string>
+    <string name="hub_smart_on" formatted="false">80% de noche, al 100% para tu alarma</string>
+    <string name="hub_limit_title">Límite de carga</string>
+    <string name="hub_limit_on">Se detiene al %1$d%% y reanuda al %2$d%%</string>
+    <string name="hub_charging_info" formatted="false">La carga inteligente se pausa al 80% desde las 22:00 y termina una hora antes de tu próxima alarma (06:00 si no hay alarma). Con el límite de carga, se detiene en el nivel elegido y se reanuda 5% abajo. En ambos casos, y con la carga bypass, el teléfono sigue funcionando con el cargador.</string>
+    <string name="hub_touch_title">Muestreo táctil alto</string>
+    <string name="hub_touch_on">Respuesta táctil al máximo para juegos</string>
+    <string name="hub_touch_off">Respuesta táctil estándar</string>
+    <string name="hub_touch_error">No se pudo cambiar el ajuste táctil</string>
+    <string name="hub_footer">Hecho con 🌸 por HanaSkys</string>
+</resources>

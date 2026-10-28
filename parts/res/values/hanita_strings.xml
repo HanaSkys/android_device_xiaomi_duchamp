@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: 2026 HanaSkys
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <string name="hanita_hub_label">Hanita Mods</string>
+    <string name="hanita_hub_summary">Battery, charging &amp; touch</string>
+    <string name="hub_title" translatable="false">🌸 Hanita Mods 🌸</string>
+    <string name="hub_eyebrow" translatable="false">crDroid · Poco X6 Pro</string>
+    <string name="hub_subtitle">Handcrafted extras for your phone</string>
+    <string name="hub_back">Back</string>
+    <string name="hub_section_battery">Battery</string>
+    <string name="hub_section_touch">Display &amp; touch</string>
+    <string name="hub_chip_battery" translatable="false">🔋 %1$d%%</string>
+    <string name="hub_chip_charging" translatable="false">⚡ %1$d%%</string>
+    <string name="hub_chip_bypass" translatable="false">🎮 Bypass</string>
+    <string name="hub_chip_limit" translatable="false">🛡️ %1$d%%</string>
+    <string name="hub_chip_touch" translatable="false">👆 Touch+</string>
+    <string name="hub_capacity_label">Maximum capacity</string>
+    <string name="hub_capacity_value" translatable="false">%1$d%%</string>
+    <string name="hub_stat_cycles">Charge cycles</string>
+    <string name="hub_stat_temp">Temperature</string>
+    <string name="hub_stat_condition">Condition</string>
+    <string name="hub_temp_value" translatable="false">%1$.1f °C</string>
+    <string name="hub_health_good">Good</string>
+    <string name="hub_health_fair">Fair</string>
+    <string name="hub_health_poor">Replace soon</string>
+    <string name="hub_health_unknown" translatable="false">—</string>
+    <string name="hub_health_explain">An estimate of the current battery capacity compared to when it was new, as reported by the battery fuel gauge. A lower value means less usage time between charges.</string>
+    <string name="hub_state_on_battery">On battery</string>
+    <string name="hub_state_charging">Charging</string>
+    <string name="hub_state_full">Fully charged</string>
+    <string name="hub_state_paused">Charging paused at %1$d%%</string>
+    <string name="hub_state_bypass">Bypass charging active</string>
+    <string name="hub_bypass_title">Bypass charging</string>
+    <string name="hub_bypass_on_plugged">The charger powers the phone directly</string>
+    <string name="hub_bypass_on_unplugged">Ready · plug in the charger</string>
+    <string name="hub_off">Off</string>
+    <string name="hub_smart_title">Smart charging</string>
+    <string name="hub_smart_on" formatted="false">80% overnight, full by your alarm</string>
+    <string name="hub_limit_title">Charge limit</string>
+    <string name="hub_limit_on">Stops at %1$d%%, resumes at %2$d%%</string>
+    <string name="hub_limit_range" translatable="false" formatted="false">70% – 100%</string>
+    <string name="hub_charging_info" formatted="false">Smart charging pauses at 80% from 22:00 and finishes one hour before your next alarm (06:00 without an alarm). With a charge limit, charging stops at the selected level and resumes 5% below it. In both cases, and with bypass charging, the phone keeps running from the charger.</string>
+    <string name="hub_touch_title">High touch polling</string>
+    <string name="hub_touch_on">Max touch response for gaming</string>
+    <string name="hub_touch_off">Standard touch response</string>
+    <string name="hub_touch_error">Couldn\'t change the touch setting</string>
+    <string name="hub_footer">Made with 🌸 by HanaSkys</string>
+</resources>
