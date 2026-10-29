@@ -1,0 +1,22 @@
+# SPDX-FileCopyrightText: 2026 HanaSkys
+# SPDX-License-Identifier: Apache-2.0
+#
+# Hanita Mods performance options. XiaomiParts only stores the choice in
+# persist.sys.hanita.*; init applies it when the property is loaded at boot
+# and whenever it changes. Unset properties keep the kernel/device defaults.
+
+# TCP congestion control (bbr is built into our kernel, cubic is the default)
+on property:persist.sys.hanita.tcp_cc=cubic
+    write /proc/sys/net/ipv4/tcp_congestion_control cubic
+
+on property:persist.sys.hanita.tcp_cc=bbr
+    write /proc/sys/net/ipv4/tcp_congestion_control bbr
+
+# ZRAM compression algorithm. Persistent properties load after post-fs-data
+# (where init.cgroup.rc sets lz4) and before sys.boot_completed (swapon_all),
+# so the choice applies while zram is still uninitialized: next boot only.
+on property:persist.sys.hanita.zram_algo=lz4
+    write /sys/block/zram0/comp_algorithm lz4
+
+on property:persist.sys.hanita.zram_algo=zstd
+    write /sys/block/zram0/comp_algorithm zstd

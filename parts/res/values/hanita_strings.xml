@@ -48,4 +48,18 @@
     <string name="hub_touch_off">Standard touch response</string>
     <string name="hub_touch_error">Couldn\'t change the touch setting</string>
     <string name="hub_footer">Made with 🌸 by HanaSkys</string>
+    <string name="hub_section_performance">Performance</string>
+    <string name="hub_tcp_title">TCP congestion control</string>
+    <string name="hub_tcp_cubic" translatable="false">CUBIC</string>
+    <string name="hub_tcp_bbr" translatable="false">BBR</string>
+    <string name="hub_tcp_cubic_summary">Standard · stable on any network</string>
+    <string name="hub_tcp_bbr_summary">Faster, lower ping on unstable mobile data</string>
+    <string name="hub_zram_title">ZRAM compression</string>
+    <string name="hub_zram_lz4" translatable="false">LZ4</string>
+    <string name="hub_zram_zstd" translatable="false">ZSTD</string>
+    <string name="hub_zram_lz4_summary">Fastest · less CPU use</string>
+    <string name="hub_zram_zstd_summary">Compresses more · keeps more apps in memory</string>
+    <string name="hub_zram_note_same">Active now: %1$s</string>
+    <string name="hub_zram_note_reboot">Active now: %1$s · applies after reboot</string>
+    <string name="hub_option_error">Couldn\'t apply this option</string>
 </resources>

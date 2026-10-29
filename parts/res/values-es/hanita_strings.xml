@@ -36,4 +36,14 @@
     <string name="hub_touch_off">Respuesta táctil estándar</string>
     <string name="hub_touch_error">No se pudo cambiar el ajuste táctil</string>
     <string name="hub_footer">Hecho con 🌸 por HanaSkys</string>
+    <string name="hub_section_performance">Rendimiento</string>
+    <string name="hub_tcp_title">Control de congestión TCP</string>
+    <string name="hub_tcp_cubic_summary">Estándar · estable en cualquier red</string>
+    <string name="hub_tcp_bbr_summary">Más rápido y menos ping en datos móviles inestables</string>
+    <string name="hub_zram_title">Compresión de ZRAM</string>
+    <string name="hub_zram_lz4_summary">Más rápido · usa menos CPU</string>
+    <string name="hub_zram_zstd_summary">Comprime más · mantiene más apps en memoria</string>
+    <string name="hub_zram_note_same">Activo ahora: %1$s</string>
+    <string name="hub_zram_note_reboot">Activo ahora: %1$s · se aplica al reiniciar</string>
+    <string name="hub_option_error">No se pudo aplicar esta opción</string>
 </resources>

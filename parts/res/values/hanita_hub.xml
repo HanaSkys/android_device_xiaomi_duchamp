@@ -106,4 +106,17 @@
         <item name="android:layout_gravity">center_vertical</item>
         <item name="android:background">@color/hub_card_stroke</item>
     </style>
+
+    <style name="HubOption">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">44dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:background">@drawable/bg_hub_option</item>
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/hub_option_text</item>
+        <item name="android:textSize">14sp</item>
+    </style>
 </resources>

@@ -457,6 +457,140 @@
                 android:contentDescription="@string/hub_touch_title" />
         </LinearLayout>
 
+        <!-- Performance -->
+        <TextView style="@style/HubSection" android:text="@string/hub_section_performance" />
+
+        <LinearLayout
+            android:id="@+id/card_tcp"
+            style="@style/HubCard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clickable="false"
+            android:focusable="false"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView style="@style/HubIcon" android:src="@drawable/ic_hub_network" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        style="@style/HubCardTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/hub_tcp_title" />
+
+                    <TextView
+                        android:id="@+id/tcp_state"
+                        style="@style/HubCardBody"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/opt_tcp_cubic"
+                    style="@style/HubOption"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginEnd="6dp"
+                    android:text="@string/hub_tcp_cubic" />
+
+                <TextView
+                    android:id="@+id/opt_tcp_bbr"
+                    style="@style/HubOption"
+                    android:layout_marginStart="6dp"
+                    android:layout_marginEnd="0dp"
+                    android:text="@string/hub_tcp_bbr" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/card_zram"
+            style="@style/HubCard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:clickable="false"
+            android:focusable="false"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView style="@style/HubIcon" android:src="@drawable/ic_hub_memory" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        style="@style/HubCardTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/hub_zram_title" />
+
+                    <TextView
+                        android:id="@+id/zram_state"
+                        style="@style/HubCardBody"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/opt_zram_lz4"
+                    style="@style/HubOption"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginEnd="6dp"
+                    android:text="@string/hub_zram_lz4" />
+
+                <TextView
+                    android:id="@+id/opt_zram_zstd"
+                    style="@style/HubOption"
+                    android:layout_marginStart="6dp"
+                    android:layout_marginEnd="0dp"
+                    android:text="@string/hub_zram_zstd" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/zram_note"
+                style="@style/HubCardBody"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:textSize="12sp" />
+        </LinearLayout>
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

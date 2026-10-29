@@ -14,10 +14,18 @@ android_app {
     platform_apis: true,
     privileged: true,
     system_ext_specific: true,
+    required: ["init.hanita.rc"],
     static_libs: [
         "androidx.core_core",
         "androidx.preference_preference",
         "org.lineageos.settings.resources",
         "vendor.xiaomi.hardware.displayfeature_aidl-V2-java",
     ],
+}
+
+prebuilt_etc {
+    name: "init.hanita.rc",
+    src: "init/init.hanita.rc",
+    sub_dir: "init",
+    system_ext_specific: true,
 }

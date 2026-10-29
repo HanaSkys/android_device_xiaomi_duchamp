@@ -139,6 +139,11 @@ class HanitaHubActivity : Activity() {
         listOf(R.id.card_bypass, R.id.card_smart, R.id.card_touch)
             .forEach { addPressFeedback(findViewById(it)) }
 
+        bindOption(R.id.opt_tcp_cubic) { PerformanceTuning.setTcp(PerformanceTuning.TCP_CUBIC) }
+        bindOption(R.id.opt_tcp_bbr) { PerformanceTuning.setTcp(PerformanceTuning.TCP_BBR) }
+        bindOption(R.id.opt_zram_lz4) { PerformanceTuning.setZram(PerformanceTuning.ZRAM_LZ4) }
+        bindOption(R.id.opt_zram_zstd) { PerformanceTuning.setZram(PerformanceTuning.ZRAM_ZSTD) }
+
         if (savedInstanceState == null) animateEntrance(content)
     }
 
@@ -154,6 +159,7 @@ class HanitaHubActivity : Activity() {
             HighTouchPolling.SYSTEM_TABLE_URI, true, settingsObserver)
         refreshHealth()
         refresh()
+        refreshPerformance()
         petals.start()
     }
 
@@ -242,6 +248,42 @@ class HanitaHubActivity : Activity() {
         healthStatus.text = state
         statTemp.text = if (tempTenths == Int.MIN_VALUE) getString(R.string.hub_health_unknown)
             else getString(R.string.hub_temp_value, tempTenths / 10f)
+    }
+
+    private fun bindOption(id: Int, apply: () -> Boolean) {
+        findViewById<View>(id).setOnClickListener {
+            if (it.isSelected) return@setOnClickListener
+            if (!apply()) {
+                Toast.makeText(this, R.string.hub_option_error, Toast.LENGTH_SHORT).show()
+            }
+            refreshPerformance()
+        }
+    }
+
+    private fun refreshPerformance() {
+        val tcp = PerformanceTuning.tcp()
+        val bbr = tcp == PerformanceTuning.TCP_BBR
+        findViewById<View>(R.id.opt_tcp_cubic).isSelected = !bbr
+        findViewById<View>(R.id.opt_tcp_bbr).isSelected = bbr
+        findViewById<TextView>(R.id.tcp_state).text = getString(
+            if (bbr) R.string.hub_tcp_bbr_summary else R.string.hub_tcp_cubic_summary)
+
+        val zram = PerformanceTuning.zram()
+        val zstd = zram == PerformanceTuning.ZRAM_ZSTD
+        findViewById<View>(R.id.opt_zram_lz4).isSelected = !zstd
+        findViewById<View>(R.id.opt_zram_zstd).isSelected = zstd
+        findViewById<TextView>(R.id.zram_state).text = getString(
+            if (zstd) R.string.hub_zram_zstd_summary else R.string.hub_zram_lz4_summary)
+        val note = findViewById<TextView>(R.id.zram_note)
+        val active = PerformanceTuning.activeZram()
+        if (active == null) {
+            note.visibility = View.GONE
+        } else {
+            note.visibility = View.VISIBLE
+            note.text = getString(
+                if (active == zram) R.string.hub_zram_note_same else R.string.hub_zram_note_reboot,
+                active.uppercase())
+        }
     }
 
     /** State of health and cycles change slowly; read them once per resume. */
