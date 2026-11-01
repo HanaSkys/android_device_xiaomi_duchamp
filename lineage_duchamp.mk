@@ -13,6 +13,9 @@ $(call inherit-product, device/xiaomi/duchamp/device.mk)
 # Inherit some common.
 $(call inherit-product, vendor/lineage/config/common_full_phone.mk)
 
+# Keep userdebug builds debuggable (adb root, rooted debugging)
+PRODUCT_NOT_DEBUGGABLE_IN_USERDEBUG := false
+
 PRODUCT_BRAND := POCO
 PRODUCT_DEVICE := duchamp
 PRODUCT_MANUFACTURER := Xiaomi
