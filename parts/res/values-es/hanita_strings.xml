@@ -46,4 +46,15 @@
     <string name="hub_zram_note_same">Activo ahora: %1$s</string>
     <string name="hub_zram_note_reboot">Activo ahora: %1$s · se aplica al reiniciar</string>
     <string name="hub_option_error">No se pudo aplicar esta opción</string>
+    <string name="hub_section_display">Pantalla</string>
+    <string name="hub_res_title">Resolución de pantalla</string>
+    <string name="hub_res_subtitle">Las resoluciones más bajas ahorran batería. Algunas apps en segundo plano pueden cerrarse al cambiar.</string>
+    <string name="hub_res_wqhd_note">La más nítida</string>
+    <string name="hub_res_fhd_note">Ahorra batería</string>
+    <string name="hub_res_hd_note">Máximo ahorro</string>
+    <string name="hub_res_info">Actual: %1$s (%2$d × %3$d). La interfaz se dibuja a esta resolución y se escala a la pantalla; el texto y los iconos mantienen su tamaño.</string>
+    <string name="hub_res_confirm_title">¿Cambiar a %1$s?</string>
+    <string name="hub_res_confirm_message">La pantalla se actualizará y algunas apps en segundo plano pueden cerrarse.</string>
+    <string name="hub_res_confirm_apply">Cambiar</string>
+    <string name="hub_res_error">No se pudo cambiar la resolución</string>
 </resources>

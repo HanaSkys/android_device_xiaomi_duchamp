@@ -139,6 +139,11 @@ class HanitaHubActivity : Activity() {
         listOf(R.id.card_bypass, R.id.card_smart, R.id.card_touch)
             .forEach { addPressFeedback(findViewById(it)) }
 
+        findViewById<View>(R.id.card_resolution).setOnClickListener {
+            startActivity(Intent(this, ResolutionActivity::class.java))
+        }
+        addPressFeedback(findViewById(R.id.card_resolution))
+
         bindOption(R.id.opt_tcp_cubic) { PerformanceTuning.setTcp(PerformanceTuning.TCP_CUBIC) }
         bindOption(R.id.opt_tcp_bbr) { PerformanceTuning.setTcp(PerformanceTuning.TCP_BBR) }
         bindOption(R.id.opt_zram_lz4) { PerformanceTuning.setZram(PerformanceTuning.ZRAM_LZ4) }
@@ -160,6 +165,7 @@ class HanitaHubActivity : Activity() {
         refreshHealth()
         refresh()
         refreshPerformance()
+        refreshDisplay()
         petals.start()
     }
 
@@ -248,6 +254,12 @@ class HanitaHubActivity : Activity() {
         healthStatus.text = state
         statTemp.text = if (tempTenths == Int.MIN_VALUE) getString(R.string.hub_health_unknown)
             else getString(R.string.hub_temp_value, tempTenths / 10f)
+    }
+
+    private fun refreshDisplay() {
+        val res = DisplayResolution.current()
+        findViewById<TextView>(R.id.resolution_state).text = getString(
+            R.string.hub_res_state, getString(res.labelRes), res.width, res.height)
     }
 
     private fun bindOption(id: Int, apply: () -> Boolean) {

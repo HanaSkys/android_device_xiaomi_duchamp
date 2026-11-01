@@ -62,4 +62,20 @@
     <string name="hub_zram_note_same">Active now: %1$s</string>
     <string name="hub_zram_note_reboot">Active now: %1$s · applies after reboot</string>
     <string name="hub_option_error">Couldn\'t apply this option</string>
+    <string name="hub_section_display">Display</string>
+    <string name="hub_res_title">Screen resolution</string>
+    <string name="hub_res_subtitle">Lower resolutions save battery. Some background apps may close while switching.</string>
+    <string name="hub_res_wqhd" translatable="false">WQHD+</string>
+    <string name="hub_res_fhd" translatable="false">FHD+</string>
+    <string name="hub_res_hd" translatable="false">HD+</string>
+    <string name="hub_res_wqhd_note">Sharpest</string>
+    <string name="hub_res_fhd_note">Saves battery</string>
+    <string name="hub_res_hd_note">Max saving</string>
+    <string name="hub_res_size" translatable="false">%1$d × %2$d</string>
+    <string name="hub_res_state" translatable="false">%1$s · %2$d × %3$d</string>
+    <string name="hub_res_info">Current: %1$s (%2$d × %3$d). The interface is rendered at this resolution and scaled to the panel; text and icons keep the same size.</string>
+    <string name="hub_res_confirm_title">Switch to %1$s?</string>
+    <string name="hub_res_confirm_message">The screen will refresh and some apps running in the background may close.</string>
+    <string name="hub_res_confirm_apply">Switch</string>
+    <string name="hub_res_error">Couldn\'t change the resolution</string>
 </resources>

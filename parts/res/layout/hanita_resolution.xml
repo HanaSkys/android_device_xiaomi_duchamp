@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: 2026 HanaSkys
+     SPDX-License-Identifier: Apache-2.0
+-->
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/res_scroll"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/hub_bg"
+    android:clipToPadding="false"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:id="@+id/res_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:paddingBottom="24dp">
+
+        <ImageButton
+            android:id="@+id/res_back"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/bg_hub_back"
+            android:contentDescription="@string/hub_back"
+            android:padding="12dp"
+            android:src="@drawable/ic_hub_back"
+            android:tint="@color/hub_text" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="24dp"
+            android:accessibilityHeading="true"
+            android:text="@string/hub_res_title"
+            android:textColor="@color/hub_text"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+        <TextView
+            style="@style/HubCardBody"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="6dp"
+            android:text="@string/hub_res_subtitle" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
+            android:baselineAligned="false"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:id="@+id/col_wqhd"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="0dp"
+                android:layout_marginEnd="6dp"
+                android:layout_weight="1"
+                android:background="?android:attr/selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <com.xiaomi.settings.hub.ResolutionPreviewView
+                    android:id="@+id/preview_wqhd"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:importantForAccessibility="no" />
+
+                <TextView
+                    android:id="@+id/label_wqhd"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:fontFamily="sans-serif-medium"
+                    android:text="@string/hub_res_wqhd"
+                    android:textColor="@color/hub_text"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/size_wqhd"
+                    style="@style/HubCardBody"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:gravity="center"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/note_wqhd"
+                    style="@style/HubCardBody"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/hub_res_wqhd_note"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/col_fhd"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="6dp"
+                android:layout_marginEnd="6dp"
+                android:layout_weight="1"
+                android:background="?android:attr/selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <com.xiaomi.settings.hub.ResolutionPreviewView
+                    android:id="@+id/preview_fhd"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:importantForAccessibility="no" />
+
+                <TextView
+                    android:id="@+id/label_fhd"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:fontFamily="sans-serif-medium"
+                    android:text="@string/hub_res_fhd"
+                    android:textColor="@color/hub_text"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/size_fhd"
+                    style="@style/HubCardBody"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:gravity="center"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/note_fhd"
+                    style="@style/HubCardBody"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/hub_res_fhd_note"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/col_hd"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="6dp"
+                android:layout_marginEnd="0dp"
+                android:layout_weight="1"
+                android:background="?android:attr/selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <com.xiaomi.settings.hub.ResolutionPreviewView
+                    android:id="@+id/preview_hd"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:importantForAccessibility="no" />
+
+                <TextView
+                    android:id="@+id/label_hd"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:fontFamily="sans-serif-medium"
+                    android:text="@string/hub_res_hd"
+                    android:textColor="@color/hub_text"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/size_hd"
+                    style="@style/HubCardBody"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:gravity="center"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/note_hd"
+                    style="@style/HubCardBody"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/hub_res_hd_note"
+                    android:textSize="12sp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
+            android:background="@drawable/bg_hub_info"
+            android:orientation="horizontal"
+            android:padding="18dp">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginTop="1dp"
+                android:importantForAccessibility="no"
+                android:src="@drawable/ic_hub_info"
+                android:tint="@color/hub_accent" />
+
+            <TextView
+                android:id="@+id/res_info"
+                style="@style/HubCardBody"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_weight="1"
+                android:textSize="12sp" />
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

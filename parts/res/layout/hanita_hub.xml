@@ -457,6 +457,49 @@
                 android:contentDescription="@string/hub_touch_title" />
         </LinearLayout>
 
+        <!-- Display -->
+        <TextView style="@style/HubSection" android:text="@string/hub_section_display" />
+
+        <LinearLayout
+            android:id="@+id/card_resolution"
+            style="@style/HubCard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView style="@style/HubIcon" android:src="@drawable/ic_hub_resolution" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="12dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/HubCardTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/hub_res_title" />
+
+                <TextView
+                    android:id="@+id/resolution_state"
+                    style="@style/HubCardBody"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp" />
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:importantForAccessibility="no"
+                android:src="@drawable/ic_hub_next"
+                android:tint="@color/hub_text_secondary" />
+        </LinearLayout>
+
         <!-- Performance -->
         <TextView style="@style/HubSection" android:text="@string/hub_section_performance" />
 

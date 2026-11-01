@@ -158,5 +158,11 @@
         <service
             android:name=".touch.HighTouchPollingService"
             android:exported="false" />
+        <!-- Hanita Mods: screen resolution -->
+        <activity
+            android:name=".hub.ResolutionActivity"
+            android:exported="false"
+            android:label="@string/hub_res_title"
+            android:theme="@style/Theme.HanitaHub" />
     </application>
 </manifest>
