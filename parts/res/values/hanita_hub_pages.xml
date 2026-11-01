@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: 2026 HanaSkys
+     SPDX-License-Identifier: Apache-2.0
+-->
+<!-- Hanita Mods redesign: home (hero, quick toggles, categories) and sub-pages -->
+<resources>
+    <style name="HubBack">
+        <item name="android:layout_width">48dp</item>
+        <item name="android:layout_height">48dp</item>
+        <item name="android:layout_marginTop">8dp</item>
+        <item name="android:background">@drawable/bg_hub_back</item>
+        <item name="android:contentDescription">@string/hub_back</item>
+        <item name="android:padding">12dp</item>
+        <item name="android:src">@drawable/ic_hub_back</item>
+        <item name="android:tint">@color/hub_text</item>
+    </style>
+
+    <style name="HubPageTitle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginStart">8dp</item>
+        <item name="android:layout_marginTop">20dp</item>
+        <item name="android:accessibilityHeading">true</item>
+        <item name="android:letterSpacing">-0.02</item>
+        <item name="android:textColor">@color/hub_text</item>
+        <item name="android:textSize">30sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="HubPageSubtitle" parent="HubCardBody">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginStart">8dp</item>
+        <item name="android:layout_marginTop">4dp</item>
+        <item name="android:layout_marginBottom">20dp</item>
+    </style>
+
+    <style name="HubHeroStat">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_marginStart">10dp</item>
+        <item name="android:background">@drawable/bg_hub_stat</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:paddingStart">12dp</item>
+        <item name="android:paddingEnd">8dp</item>
+        <item name="android:paddingTop">10dp</item>
+        <item name="android:paddingBottom">10dp</item>
+    </style>
+
+    <style name="HubHeroStatValue">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:textColor">@color/hub_hero_text</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="HubHeroStatLabel">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:textColor">@color/hub_chip_text</item>
+        <item name="android:textSize">11sp</item>
+    </style>
+
+    <style name="HubQuick">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:paddingTop">4dp</item>
+        <item name="android:paddingBottom">4dp</item>
+    </style>
+
+    <style name="HubQuickIcon">
+        <item name="android:layout_width">64dp</item>
+        <item name="android:layout_height">64dp</item>
+        <item name="android:background">@drawable/bg_hub_quick</item>
+        <item name="android:duplicateParentState">true</item>
+        <item name="android:importantForAccessibility">no</item>
+        <item name="android:padding">19dp</item>
+        <item name="android:tint">@color/hub_quick_icon</item>
+    </style>
+
+    <style name="HubQuickLabel">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">8dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:importantForAccessibility">no</item>
+        <item name="android:maxLines">2</item>
+        <item name="android:textColor">@color/hub_text</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="HubCategory" parent="HubCard">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:minHeight">136dp</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:padding">18dp</item>
+    </style>
+
+    <style name="HubCategoryIcon">
+        <item name="android:layout_width">46dp</item>
+        <item name="android:layout_height">46dp</item>
+        <item name="android:layout_marginBottom">14dp</item>
+        <item name="android:background">@drawable/bg_hub_cat_icon</item>
+        <item name="android:importantForAccessibility">no</item>
+        <item name="android:padding">11dp</item>
+        <item name="android:tint">@color/hub_accent</item>
+    </style>
+
+    <style name="HubCategorySpace">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">0dp</item>
+        <item name="android:layout_weight">1</item>
+    </style>
+
+    <style name="HubCategoryTitle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:textColor">@color/hub_text</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="HubCategoryStatus">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">3dp</item>
+        <item name="android:textColor">@color/hub_text_secondary</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="HubBadge">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginStart">6dp</item>
+        <item name="android:background">@drawable/bg_hub_badge</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:letterSpacing">0.06</item>
+        <item name="android:paddingStart">8dp</item>
+        <item name="android:paddingEnd">8dp</item>
+        <item name="android:paddingTop">3dp</item>
+        <item name="android:paddingBottom">3dp</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textColor">@color/hub_accent</item>
+        <item name="android:textSize">10sp</item>
+    </style>
+</resources>

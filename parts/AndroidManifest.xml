@@ -158,6 +158,23 @@
         <service
             android:name=".touch.HighTouchPollingService"
             android:exported="false" />
+        <!-- Hanita Mods: pages -->
+        <activity
+            android:name=".hub.HubBatteryActivity"
+            android:exported="false"
+            android:label="@string/hub_section_battery"
+            android:theme="@style/Theme.HanitaHub" />
+        <activity
+            android:name=".hub.HubDisplayActivity"
+            android:exported="false"
+            android:label="@string/hub_section_touch"
+            android:theme="@style/Theme.HanitaHub" />
+        <activity
+            android:name=".hub.HubPerformanceActivity"
+            android:exported="false"
+            android:label="@string/hub_section_performance"
+            android:theme="@style/Theme.HanitaHub" />
+
         <!-- Hanita Mods: screen resolution -->
         <activity
             android:name=".hub.ResolutionActivity"

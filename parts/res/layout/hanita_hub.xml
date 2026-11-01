@@ -25,23 +25,15 @@
 
         <ImageButton
             android:id="@+id/hub_back"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="16dp"
-            android:background="@drawable/bg_hub_back"
-            android:contentDescription="@string/hub_back"
-            android:padding="12dp"
-            android:src="@drawable/ic_hub_back"
-            android:tint="@color/hub_text" />
+            style="@style/HubBack"
+            android:layout_marginBottom="12dp" />
 
-        <!-- Hero -->
+        <!-- Hero with live stats -->
         <FrameLayout
             android:id="@+id/hub_hero"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/bg_hub_hero"
-            android:minHeight="208dp">
+            android:background="@drawable/bg_hub_hero">
 
             <com.xiaomi.settings.hub.SakuraPetalsView
                 android:id="@+id/hub_petals"
@@ -52,9 +44,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
                 android:orientation="vertical"
-                android:padding="24dp">
+                android:padding="22dp">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -69,135 +60,112 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="6dp"
+                    android:layout_marginTop="4dp"
                     android:accessibilityHeading="true"
                     android:fontFamily="sans-serif"
                     android:letterSpacing="-0.02"
                     android:text="@string/hub_title"
                     android:textColor="@color/hub_hero_text"
-                    android:textSize="30sp"
+                    android:textSize="28sp"
                     android:textStyle="bold" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:text="@string/hub_subtitle"
-                    android:textColor="@color/hub_hero_text_secondary"
-                    android:textSize="14sp" />
-
                 <LinearLayout
-                    android:id="@+id/hub_chips"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="18dp"
+                    android:baselineAligned="false"
                     android:orientation="horizontal">
 
-                    <TextView android:id="@+id/chip_battery" style="@style/HubChip" />
-                    <TextView android:id="@+id/chip_mode" style="@style/HubChip" />
-                    <TextView android:id="@+id/chip_touch" style="@style/HubChip"
-                        android:text="@string/hub_chip_touch" />
+                    <LinearLayout
+                        style="@style/HubHeroStat"
+                        android:layout_marginStart="0dp">
+                        <TextView android:id="@+id/stat_battery" style="@style/HubHeroStatValue" />
+                        <TextView android:id="@+id/stat_battery_label" style="@style/HubHeroStatLabel" />
+                    </LinearLayout>
+
+                    <LinearLayout style="@style/HubHeroStat">
+                        <TextView android:id="@+id/stat_health" style="@style/HubHeroStatValue" />
+                        <TextView style="@style/HubHeroStatLabel" android:text="@string/hub_stat_health" />
+                    </LinearLayout>
+
+                    <LinearLayout style="@style/HubHeroStat">
+                        <TextView android:id="@+id/stat_temp" style="@style/HubHeroStatValue" />
+                        <TextView style="@style/HubHeroStatLabel" android:text="@string/hub_stat_temp" />
+                    </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
         </FrameLayout>
 
-        <!-- Battery -->
-        <TextView style="@style/HubSection" android:text="@string/hub_section_battery" />
+        <!-- Quick toggles -->
+        <TextView
+            style="@style/HubSection"
+            android:layout_marginTop="24dp"
+            android:text="@string/hub_section_quick" />
 
         <LinearLayout
-            android:id="@+id/card_health"
-            style="@style/HubCard"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:clickable="false"
-            android:focusable="false"
-            android:gravity="center_horizontal"
-            android:orientation="vertical"
-            android:paddingTop="28dp">
+            android:baselineAligned="false"
+            android:clipChildren="false"
+            android:orientation="horizontal">
 
-            <FrameLayout
-                android:layout_width="176dp"
-                android:layout_height="176dp">
-
-                <com.xiaomi.settings.hub.HubRingView
-                    android:id="@+id/health_ring"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:gravity="center_horizontal"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/health_ring_text"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="sans-serif-medium"
-                        android:letterSpacing="-0.02"
-                        android:textColor="@color/hub_text"
-                        android:textSize="44sp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/hub_capacity_label"
-                        android:textColor="@color/hub_text_secondary"
-                        android:textSize="13sp" />
-                </LinearLayout>
-            </FrameLayout>
-
-            <TextView
-                android:id="@+id/health_status"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="18dp"
-                android:background="@drawable/bg_hub_status"
-                android:fontFamily="sans-serif-medium"
-                android:paddingStart="16dp"
-                android:paddingTop="8dp"
-                android:paddingEnd="16dp"
-                android:paddingBottom="8dp"
-                android:textColor="@color/hub_accent"
-                android:textSize="14sp" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="22dp"
-                android:baselineAligned="false"
-                android:orientation="horizontal">
-
-                <LinearLayout style="@style/HubStat">
-                    <TextView android:id="@+id/stat_cycles" style="@style/HubStatValue" />
-                    <TextView style="@style/HubStatLabel" android:text="@string/hub_stat_cycles" />
-                </LinearLayout>
-
-                <View style="@style/HubStatDivider" />
-
-                <LinearLayout style="@style/HubStat">
-                    <TextView android:id="@+id/stat_temp" style="@style/HubStatValue" />
-                    <TextView style="@style/HubStatLabel" android:text="@string/hub_stat_temp" />
-                </LinearLayout>
-
-                <View style="@style/HubStatDivider" />
-
-                <LinearLayout style="@style/HubStat">
-                    <TextView android:id="@+id/stat_condition" style="@style/HubStatValue" />
-                    <TextView style="@style/HubStatLabel" android:text="@string/hub_stat_condition" />
-                </LinearLayout>
+            <LinearLayout android:id="@+id/quick_bypass" style="@style/HubQuick"
+                android:contentDescription="@string/hub_bypass_title">
+                <ImageView style="@style/HubQuickIcon" android:src="@drawable/ic_bh_bypass" />
+                <TextView style="@style/HubQuickLabel" android:text="@string/hub_quick_bypass" />
             </LinearLayout>
 
-            <TextView
-                style="@style/HubCardBody"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:gravity="center"
-                android:text="@string/hub_health_explain"
-                android:textSize="12sp" />
+            <LinearLayout android:id="@+id/quick_touch" style="@style/HubQuick"
+                android:contentDescription="@string/hub_touch_title">
+                <ImageView style="@style/HubQuickIcon" android:src="@drawable/ic_hub_touch" />
+                <TextView style="@style/HubQuickLabel" android:text="@string/hub_quick_touch" />
+            </LinearLayout>
+
+            <LinearLayout android:id="@+id/quick_bbr" style="@style/HubQuick"
+                android:contentDescription="@string/hub_quick_bbr_description">
+                <ImageView style="@style/HubQuickIcon" android:src="@drawable/ic_hub_network" />
+                <TextView style="@style/HubQuickLabel" android:text="@string/hub_quick_bbr" />
+            </LinearLayout>
+
+            <LinearLayout android:id="@+id/quick_smart" style="@style/HubQuick"
+                android:contentDescription="@string/hub_smart_title">
+                <ImageView style="@style/HubQuickIcon" android:src="@drawable/ic_bh_smart_charging" />
+                <TextView style="@style/HubQuickLabel" android:text="@string/hub_quick_smart" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Categories -->
+        <TextView
+            style="@style/HubSection"
+            android:layout_marginTop="24dp"
+            android:text="@string/hub_section_categories" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:baselineAligned="false"
+            android:clipChildren="false"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:id="@+id/cat_battery"
+                style="@style/HubCategory"
+                android:layout_marginEnd="6dp">
+                <ImageView style="@style/HubCategoryIcon" android:src="@drawable/ic_hub_battery" />
+                <Space style="@style/HubCategorySpace" />
+                <TextView style="@style/HubCategoryTitle" android:text="@string/hub_section_battery" />
+                <TextView android:id="@+id/cat_battery_status" style="@style/HubCategoryStatus" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/cat_display"
+                style="@style/HubCategory"
+                android:layout_marginStart="6dp">
+                <ImageView style="@style/HubCategoryIcon" android:src="@drawable/ic_hub_display" />
+                <Space style="@style/HubCategorySpace" />
+                <TextView style="@style/HubCategoryTitle" android:text="@string/hub_section_touch" />
+                <TextView android:id="@+id/cat_display_status" style="@style/HubCategoryStatus" />
+            </LinearLayout>
         </LinearLayout>
 
         <LinearLayout
@@ -209,57 +177,25 @@
             android:orientation="horizontal">
 
             <LinearLayout
-                android:id="@+id/card_bypass"
-                style="@style/HubCard"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_marginEnd="6dp"
-                android:layout_weight="1"
-                android:orientation="vertical">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
-
-                    <ImageView style="@style/HubIcon" android:src="@drawable/ic_bh_bypass" />
-
-                    <Space
-                        android:layout_width="0dp"
-                        android:layout_height="0dp"
-                        android:layout_weight="1" />
-
-                    <com.xiaomi.settings.hub.SakuraToggle
-                        android:id="@+id/toggle_bypass"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:contentDescription="@string/hub_bypass_title" />
-                </LinearLayout>
-
-                <TextView
-                    style="@style/HubCardTitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:text="@string/hub_bypass_title" />
-
-                <TextView
-                    android:id="@+id/bypass_state"
-                    style="@style/HubCardBody"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp" />
+                android:id="@+id/cat_performance"
+                style="@style/HubCategory"
+                android:layout_marginEnd="6dp">
+                <ImageView style="@style/HubCategoryIcon" android:src="@drawable/ic_hub_speed" />
+                <Space style="@style/HubCategorySpace" />
+                <TextView style="@style/HubCategoryTitle" android:text="@string/hub_section_performance" />
+                <TextView android:id="@+id/cat_performance_status" style="@style/HubCategoryStatus" />
             </LinearLayout>
 
+            <!-- Game Space: coming soon -->
             <LinearLayout
-                android:id="@+id/card_smart"
-                style="@style/HubCard"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
+                android:id="@+id/cat_game"
+                style="@style/HubCategory"
                 android:layout_marginStart="6dp"
-                android:layout_weight="1"
-                android:orientation="vertical">
+                android:alpha="0.7"
+                android:clickable="false"
+                android:focusable="false">
+                <ImageView style="@style/HubCategoryIcon" android:src="@drawable/ic_hub_game" />
+                <Space style="@style/HubCategorySpace" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -267,377 +203,25 @@
                     android:gravity="center_vertical"
                     android:orientation="horizontal">
 
-                    <ImageView style="@style/HubIcon" android:src="@drawable/ic_bh_smart_charging" />
-
-                    <Space
+                    <TextView
+                        style="@style/HubCategoryTitle"
                         android:layout_width="0dp"
-                        android:layout_height="0dp"
-                        android:layout_weight="1" />
+                        android:layout_weight="1"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:text="@string/hub_cat_game" />
 
-                    <com.xiaomi.settings.hub.SakuraToggle
-                        android:id="@+id/toggle_smart"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:contentDescription="@string/hub_smart_title" />
+                    <TextView style="@style/HubBadge" android:text="@string/hub_badge_soon" />
                 </LinearLayout>
 
-                <TextView
-                    style="@style/HubCardTitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:text="@string/hub_smart_title" />
-
-                <TextView
-                    android:id="@+id/smart_state"
-                    style="@style/HubCardBody"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp" />
+                <TextView style="@style/HubCategoryStatus" android:text="@string/hub_cat_game_summary" />
             </LinearLayout>
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/card_limit"
-            style="@style/HubCard"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:orientation="vertical">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-
-                <ImageView style="@style/HubIcon" android:src="@drawable/ic_bh_charge_limit" />
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginEnd="12dp"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-
-                    <TextView
-                        style="@style/HubCardTitle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/hub_limit_title" />
-
-                    <TextView
-                        android:id="@+id/limit_state"
-                        style="@style/HubCardBody"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="2dp" />
-                </LinearLayout>
-
-                <com.xiaomi.settings.hub.SakuraToggle
-                    android:id="@+id/toggle_limit"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:contentDescription="@string/hub_limit_title" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/limit_controls"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="18dp"
-                android:orientation="vertical">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:baselineAligned="true"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/limit_value"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="sans-serif-medium"
-                        android:letterSpacing="-0.02"
-                        android:textColor="@color/hub_accent"
-                        android:textSize="34sp" />
-
-                    <Space
-                        android:layout_width="0dp"
-                        android:layout_height="0dp"
-                        android:layout_weight="1" />
-
-                    <TextView
-                        style="@style/HubCardBody"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/hub_limit_range" />
-                </LinearLayout>
-
-                <com.xiaomi.settings.hub.SakuraSlider
-                    android:id="@+id/limit_slider"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="-12dp"
-                    android:layout_marginEnd="-12dp"
-                    android:contentDescription="@string/hub_limit_title" />
-            </LinearLayout>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:background="@drawable/bg_hub_info"
-            android:orientation="horizontal"
-            android:padding="18dp">
-
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_marginTop="1dp"
-                android:importantForAccessibility="no"
-                android:src="@drawable/ic_hub_info"
-                android:tint="@color/hub_accent" />
-
-            <TextView
-                style="@style/HubCardBody"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="12dp"
-                android:layout_weight="1"
-                android:text="@string/hub_charging_info"
-                android:textSize="12sp" />
-        </LinearLayout>
-
-        <!-- Display & touch -->
-        <TextView
-            android:id="@+id/section_touch"
-            style="@style/HubSection"
-            android:text="@string/hub_section_touch" />
-
-        <LinearLayout
-            android:id="@+id/card_touch"
-            style="@style/HubCard"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
-
-            <ImageView style="@style/HubIcon" android:src="@drawable/ic_hub_touch" />
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="12dp"
-                android:layout_weight="1"
-                android:orientation="vertical">
-
-                <TextView
-                    style="@style/HubCardTitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/hub_touch_title" />
-
-                <TextView
-                    android:id="@+id/touch_state"
-                    style="@style/HubCardBody"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="2dp" />
-            </LinearLayout>
-
-            <com.xiaomi.settings.hub.SakuraToggle
-                android:id="@+id/toggle_touch"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:contentDescription="@string/hub_touch_title" />
-        </LinearLayout>
-
-        <!-- Display -->
-        <TextView style="@style/HubSection" android:text="@string/hub_section_display" />
-
-        <LinearLayout
-            android:id="@+id/card_resolution"
-            style="@style/HubCard"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
-
-            <ImageView style="@style/HubIcon" android:src="@drawable/ic_hub_resolution" />
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="12dp"
-                android:layout_weight="1"
-                android:orientation="vertical">
-
-                <TextView
-                    style="@style/HubCardTitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/hub_res_title" />
-
-                <TextView
-                    android:id="@+id/resolution_state"
-                    style="@style/HubCardBody"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="2dp" />
-            </LinearLayout>
-
-            <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:importantForAccessibility="no"
-                android:src="@drawable/ic_hub_next"
-                android:tint="@color/hub_text_secondary" />
-        </LinearLayout>
-
-        <!-- Performance -->
-        <TextView style="@style/HubSection" android:text="@string/hub_section_performance" />
-
-        <LinearLayout
-            android:id="@+id/card_tcp"
-            style="@style/HubCard"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:clickable="false"
-            android:focusable="false"
-            android:orientation="vertical">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-
-                <ImageView style="@style/HubIcon" android:src="@drawable/ic_hub_network" />
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-
-                    <TextView
-                        style="@style/HubCardTitle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/hub_tcp_title" />
-
-                    <TextView
-                        android:id="@+id/tcp_state"
-                        style="@style/HubCardBody"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="2dp" />
-                </LinearLayout>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/opt_tcp_cubic"
-                    style="@style/HubOption"
-                    android:layout_marginStart="0dp"
-                    android:layout_marginEnd="6dp"
-                    android:text="@string/hub_tcp_cubic" />
-
-                <TextView
-                    android:id="@+id/opt_tcp_bbr"
-                    style="@style/HubOption"
-                    android:layout_marginStart="6dp"
-                    android:layout_marginEnd="0dp"
-                    android:text="@string/hub_tcp_bbr" />
-            </LinearLayout>
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/card_zram"
-            style="@style/HubCard"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:clickable="false"
-            android:focusable="false"
-            android:orientation="vertical">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-
-                <ImageView style="@style/HubIcon" android:src="@drawable/ic_hub_memory" />
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-
-                    <TextView
-                        style="@style/HubCardTitle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/hub_zram_title" />
-
-                    <TextView
-                        android:id="@+id/zram_state"
-                        style="@style/HubCardBody"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="2dp" />
-                </LinearLayout>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/opt_zram_lz4"
-                    style="@style/HubOption"
-                    android:layout_marginStart="0dp"
-                    android:layout_marginEnd="6dp"
-                    android:text="@string/hub_zram_lz4" />
-
-                <TextView
-                    android:id="@+id/opt_zram_zstd"
-                    style="@style/HubOption"
-                    android:layout_marginStart="6dp"
-                    android:layout_marginEnd="0dp"
-                    android:text="@string/hub_zram_zstd" />
-            </LinearLayout>
-
-            <TextView
-                android:id="@+id/zram_note"
-                style="@style/HubCardBody"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:textSize="12sp" />
         </LinearLayout>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="28dp"
             android:gravity="center"
             android:text="@string/hub_footer"
             android:textColor="@color/hub_text_secondary"

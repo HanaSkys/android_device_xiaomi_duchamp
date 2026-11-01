@@ -4,7 +4,7 @@
      SPDX-License-Identifier: Apache-2.0
 -->
 <resources>
-    <string name="hanita_hub_summary">Batería, carga y touch</string>
+    <string name="hanita_hub_summary">Batería, pantalla y rendimiento</string>
     <string name="hub_subtitle">Extras hechos a mano para tu teléfono</string>
     <string name="hub_back">Atrás</string>
     <string name="hub_section_battery">Batería</string>
@@ -35,7 +35,7 @@
     <string name="hub_touch_on">Respuesta táctil al máximo para juegos</string>
     <string name="hub_touch_off">Respuesta táctil estándar</string>
     <string name="hub_touch_error">No se pudo cambiar el ajuste táctil</string>
-    <string name="hub_footer">Hecho con 🌸 por HanaSkys</string>
+    <string name="hub_footer">Hecho con ❤️ por HanaSkys</string>
     <string name="hub_section_performance">Rendimiento</string>
     <string name="hub_tcp_title">Control de congestión TCP</string>
     <string name="hub_tcp_cubic_summary">Estándar · estable en cualquier red</string>

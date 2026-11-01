@@ -5,7 +5,7 @@
 -->
 <resources>
     <string name="hanita_hub_label">Hanita Mods</string>
-    <string name="hanita_hub_summary">Battery, charging &amp; touch</string>
+    <string name="hanita_hub_summary">Battery, display &amp; performance</string>
     <string name="hub_title" translatable="false">🌸 Hanita Mods 🌸</string>
     <string name="hub_eyebrow" translatable="false">crDroid · Poco X6 Pro</string>
     <string name="hub_subtitle">Handcrafted extras for your phone</string>
@@ -47,7 +47,7 @@
     <string name="hub_touch_on">Max touch response for gaming</string>
     <string name="hub_touch_off">Standard touch response</string>
     <string name="hub_touch_error">Couldn\'t change the touch setting</string>
-    <string name="hub_footer">Made with 🌸 by HanaSkys</string>
+    <string name="hub_footer">Made with ❤️ by HanaSkys</string>
     <string name="hub_section_performance">Performance</string>
     <string name="hub_tcp_title">TCP congestion control</string>
     <string name="hub_tcp_cubic" translatable="false">CUBIC</string>

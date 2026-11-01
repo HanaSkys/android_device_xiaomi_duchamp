@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: 2026 HanaSkys
+     SPDX-License-Identifier: Apache-2.0
+-->
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/hub_scroll"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/hub_bg"
+    android:clipToPadding="false"
+    android:fillViewport="true"
+    android:overScrollMode="ifContentScrolls">
+
+    <LinearLayout
+        android:id="@+id/hub_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        android:orientation="vertical"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:paddingBottom="24dp">
+
+        <ImageButton android:id="@+id/hub_back" style="@style/HubBack" />
+
+        <TextView style="@style/HubPageTitle" android:text="@string/hub_section_touch" />
+
+        <TextView style="@style/HubPageSubtitle" android:text="@string/hub_page_display_sub" />
+
+        <LinearLayout
+            android:id="@+id/card_resolution"
+            style="@style/HubCard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView style="@style/HubIcon" android:src="@drawable/ic_hub_resolution" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="12dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/HubCardTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/hub_res_title" />
+
+                <TextView
+                    android:id="@+id/resolution_state"
+                    style="@style/HubCardBody"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp" />
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:importantForAccessibility="no"
+                android:src="@drawable/ic_hub_next"
+                android:tint="@color/hub_text_secondary" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/card_touch"
+            style="@style/HubCard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:layout_marginTop="12dp"
+            android:orientation="horizontal">
+
+            <ImageView style="@style/HubIcon" android:src="@drawable/ic_hub_touch" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="12dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/HubCardTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/hub_touch_title" />
+
+                <TextView
+                    android:id="@+id/touch_state"
+                    style="@style/HubCardBody"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp" />
+            </LinearLayout>
+
+            <com.xiaomi.settings.hub.SakuraToggle
+                android:id="@+id/toggle_touch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/hub_touch_title" />
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

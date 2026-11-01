@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: 2026 HanaSkys
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <string name="hub_section_quick">Quick toggles</string>
+    <string name="hub_section_categories">Categories</string>
+    <string name="hub_stat_level" translatable="false">%1$d%%</string>
+    <string name="hub_stat_level_charging" translatable="false">⚡ %1$d%%</string>
+    <string name="hub_temp_short" translatable="false">%1$.0f°C</string>
+    <string name="hub_stat_health">Health</string>
+    <string name="hub_stat_on_battery">On battery</string>
+    <string name="hub_stat_charging">Charging</string>
+    <string name="hub_stat_bypass">Bypass</string>
+    <string name="hub_stat_paused">Paused</string>
+    <string name="hub_stat_full">Full</string>
+    <string name="hub_quick_bypass">Bypass</string>
+    <string name="hub_quick_touch" translatable="false">Touch+</string>
+    <string name="hub_quick_bbr" translatable="false">BBR</string>
+    <string name="hub_quick_bbr_description">TCP BBR</string>
+    <string name="hub_quick_smart">Smart charging</string>
+    <string name="hub_on">On</string>
+    <string name="hub_cat_battery_summary">Bypass, smart charging and limit</string>
+    <string name="hub_cat_health">Health %1$d%%</string>
+    <string name="hub_cat_bypass">Bypass on</string>
+    <string name="hub_cat_limit">Limit %1$d%%</string>
+    <string name="hub_cat_touch_on">Touch+ on</string>
+    <string name="hub_cat_game" translatable="false">Game Space</string>
+    <string name="hub_cat_game_summary">Game mode and metrics</string>
+    <string name="hub_badge_soon">Soon</string>
+    <string name="hub_page_battery_sub">Health, charging and limits</string>
+    <string name="hub_page_display_sub">Resolution and touch response</string>
+    <string name="hub_page_perf_sub">Network and memory</string>
+</resources>
