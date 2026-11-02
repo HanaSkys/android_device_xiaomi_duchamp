@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: 2026 HanaSkys
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <string name="hub_ov_title" translatable="false">🌸 Game Space</string>
+    <string name="hub_ov_open_panel">Open the Game Space panel</string>
+    <string name="hub_ov_fps_value" translatable="false">%1$s FPS</string>
+    <string name="hub_ov_cpu">CPU GHz</string>
+    <string name="hub_ov_gpu">GPU MHz</string>
+    <string name="hub_ov_temp">Temp</string>
+    <string name="hub_ov_watts">Watts</string>
+    <string name="hub_ov_t_bypass">Bypass</string>
+    <string name="hub_ov_t_touch" translatable="false">Touch+</string>
+    <string name="hub_ov_t_silence">Silence</string>
+    <string name="hub_ov_t_brightness">Brightness</string>
+    <string name="hub_ov_t_perf">Performance</string>
+    <string name="hub_ov_t_monitor">Monitor</string>
+    <string name="hub_gs_section_overlay">In-game panel</string>
+    <string name="hub_gs_panel_title">Side panel</string>
+    <string name="hub_gs_panel_body">Swipe from the left edge while you play</string>
+    <string name="hub_gs_mini_title">Mini monitor</string>
+    <string name="hub_gs_mini_body">FPS, temperature and power always on screen</string>
+    <string name="hub_gs_opacity_title">Opacity</string>
+    <string name="hub_gs_opacity_body">Lower lets you see more of the game</string>
+    <string name="hub_gs_opacity_value" translatable="false">%1$d%%</string>
+    <string name="hub_gs_opacity_range" translatable="false" formatted="false">20% – 100%</string>
+    <string name="hub_gs_mini_position">Mini monitor position</string>
+    <string name="hub_gs_pos_left">Top left</string>
+    <string name="hub_gs_pos_right">Top right</string>
+    <string name="hub_gs_mini_size">Mini monitor size</string>
+    <string name="hub_gs_size_small">Small</string>
+    <string name="hub_gs_size_medium">Medium</string>
+    <string name="hub_gs_size_large">Large</string>
+    <string name="hub_gs_stat_fps">Avg FPS</string>
+</resources>

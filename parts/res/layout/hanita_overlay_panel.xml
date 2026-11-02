@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: 2026 HanaSkys
+     SPDX-License-Identifier: Apache-2.0
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="328dp"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_ov_panel"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-medium"
+            android:shadowColor="@color/hub_ov_shadow"
+            android:shadowRadius="4"
+            android:text="@string/hub_ov_title"
+            android:textColor="@color/hub_ov_text"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/ov_game"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_weight="1"
+            android:ellipsize="end"
+            android:gravity="end"
+            android:maxLines="1"
+            android:shadowColor="@color/hub_ov_shadow"
+            android:shadowRadius="4"
+            android:textColor="@color/hub_ov_sub"
+            android:textSize="11sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:gravity="bottom"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/ov_fps"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-medium"
+            android:includeFontPadding="false"
+            android:minWidth="48dp"
+            android:shadowColor="@color/hub_ov_shadow"
+            android:shadowRadius="4"
+            android:text="—"
+            android:textColor="@color/hub_ov_accent"
+            android:textSize="34sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginBottom="3dp"
+            android:shadowColor="@color/hub_ov_shadow"
+            android:shadowRadius="4"
+            android:text="FPS"
+            android:textColor="@color/hub_ov_sub"
+            android:textSize="11sp" />
+
+        <com.xiaomi.settings.gamespace.FpsGraphView
+            android:id="@+id/ov_graph"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="12dp"
+            android:layout_weight="1"
+            android:importantForAccessibility="no" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:baselineAligned="false"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/ov_m_cpu"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="0dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_ov_metric"
+            android:orientation="vertical"
+            android:paddingStart="10dp"
+            android:paddingTop="7dp"
+            android:paddingEnd="6dp"
+            android:paddingBottom="7dp">
+
+            <TextView android:id="@+id/ov_cpu" style="@style/HubOverlayValue" />
+            <TextView style="@style/HubOverlayLabel" android:text="@string/hub_ov_cpu" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ov_m_gpu"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_ov_metric"
+            android:orientation="vertical"
+            android:paddingStart="10dp"
+            android:paddingTop="7dp"
+            android:paddingEnd="6dp"
+            android:paddingBottom="7dp">
+
+            <TextView android:id="@+id/ov_gpu" style="@style/HubOverlayValue" />
+            <TextView style="@style/HubOverlayLabel" android:text="@string/hub_ov_gpu" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ov_m_temp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_ov_metric"
+            android:orientation="vertical"
+            android:paddingStart="10dp"
+            android:paddingTop="7dp"
+            android:paddingEnd="6dp"
+            android:paddingBottom="7dp">
+
+            <TextView android:id="@+id/ov_temp" style="@style/HubOverlayValue" />
+            <TextView style="@style/HubOverlayLabel" android:text="@string/hub_ov_temp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ov_m_watts"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_ov_metric"
+            android:orientation="vertical"
+            android:paddingStart="10dp"
+            android:paddingTop="7dp"
+            android:paddingEnd="6dp"
+            android:paddingBottom="7dp">
+
+            <TextView android:id="@+id/ov_watts" style="@style/HubOverlayValue" />
+            <TextView style="@style/HubOverlayLabel" android:text="@string/hub_ov_watts" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:orientation="horizontal">
+
+        <LinearLayout android:id="@+id/ov_t_bypass" style="@style/HubOverlayTile">
+            <ImageView style="@style/HubOverlayTileIcon" android:src="@drawable/ic_bh_bypass" />
+            <TextView style="@style/HubOverlayTileText" android:text="@string/hub_ov_t_bypass" />
+        </LinearLayout>
+
+        <LinearLayout android:id="@+id/ov_t_touch" style="@style/HubOverlayTile" android:layout_marginStart="8dp">
+            <ImageView style="@style/HubOverlayTileIcon" android:src="@drawable/ic_hub_touch" />
+            <TextView style="@style/HubOverlayTileText" android:text="@string/hub_ov_t_touch" />
+        </LinearLayout>
+
+        <LinearLayout android:id="@+id/ov_t_silence" style="@style/HubOverlayTile" android:layout_marginStart="8dp">
+            <ImageView style="@style/HubOverlayTileIcon" android:src="@drawable/ic_hub_bell_off" />
+            <TextView style="@style/HubOverlayTileText" android:text="@string/hub_ov_t_silence" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:orientation="horizontal">
+
+        <LinearLayout android:id="@+id/ov_t_brightness" style="@style/HubOverlayTile">
+            <ImageView style="@style/HubOverlayTileIcon" android:src="@drawable/ic_hub_brightness" />
+            <TextView style="@style/HubOverlayTileText" android:text="@string/hub_ov_t_brightness" />
+        </LinearLayout>
+
+        <LinearLayout android:id="@+id/ov_t_perf" style="@style/HubOverlayTile" android:layout_marginStart="8dp">
+            <ImageView style="@style/HubOverlayTileIcon" android:src="@drawable/ic_hub_speed" />
+            <TextView style="@style/HubOverlayTileText" android:text="@string/hub_ov_t_perf" />
+        </LinearLayout>
+
+        <LinearLayout android:id="@+id/ov_t_mini" style="@style/HubOverlayTile" android:layout_marginStart="8dp">
+            <ImageView style="@style/HubOverlayTileIcon" android:src="@drawable/ic_hub_monitor" />
+            <TextView style="@style/HubOverlayTileText" android:text="@string/hub_ov_t_monitor" />
+        </LinearLayout>
+
+    </LinearLayout>
+</LinearLayout>

@@ -9,3 +9,6 @@ allow init sysfs_power_supply:lnk_file { r_file_perms relabelfrom relabelto };
 allow init sysfs_batteryinfo:dir { r_dir_perms setattr relabelfrom relabelto };
 allow init sysfs_batteryinfo:file { rw_file_perms setattr relabelfrom relabelto };
 r_dir_file(init, sysfs_batteryinfo)
+
+# Hanita Mods Game Space: init.hanita.rc gives the GED KPI (FPS) to system, read-only
+allow init sysfs_ged:file setattr;

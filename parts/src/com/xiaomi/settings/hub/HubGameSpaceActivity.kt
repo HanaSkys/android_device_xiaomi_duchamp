@@ -9,6 +9,7 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.content.res.ColorStateList
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.text.format.DateUtils
 import android.view.LayoutInflater
@@ -63,6 +64,38 @@ class HubGameSpaceActivity : HubPageActivity() {
         bindThermal(R.id.opt_th_keep, GameSpaceSettings.THERMAL_KEEP)
         bindThermal(R.id.opt_th_game, GameSpaceSettings.THERMAL_GAME)
         bindThermal(R.id.opt_th_perf, GameSpaceSettings.THERMAL_PERFORMANCE)
+
+        // In-game panel
+        bindOption(R.id.row_gs_panel, R.id.toggle_gs_panel, GameSpaceSettings.KEY_PANEL)
+        bindOption(R.id.row_gs_mini, R.id.toggle_gs_mini, GameSpaceSettings.KEY_MINI)
+        val slider = findViewById<SakuraSlider>(R.id.gs_opacity_slider)
+        slider.min = GameSpaceSettings.OPACITY_MIN
+        slider.max = GameSpaceSettings.OPACITY_MAX
+        slider.onValueChanging = { showOpacity(it) }
+        slider.onValueCommitted = {
+            prefs.edit().putInt(GameSpaceSettings.KEY_OPACITY, it).apply()
+        }
+        bindChoice(R.id.opt_pos_left, GameSpaceSettings.KEY_MINI_POS, GameSpaceSettings.POS_LEFT)
+        bindChoice(R.id.opt_pos_right, GameSpaceSettings.KEY_MINI_POS, GameSpaceSettings.POS_RIGHT)
+        bindChoice(R.id.opt_size_s, GameSpaceSettings.KEY_MINI_SIZE, GameSpaceSettings.SIZE_SMALL)
+        bindChoice(R.id.opt_size_m, GameSpaceSettings.KEY_MINI_SIZE, GameSpaceSettings.SIZE_MEDIUM)
+        bindChoice(R.id.opt_size_l, GameSpaceSettings.KEY_MINI_SIZE, GameSpaceSettings.SIZE_LARGE)
+    }
+
+    private fun bindChoice(id: Int, key: String, value: Int) {
+        findViewById<View>(id).setOnClickListener { prefs.edit().putInt(key, value).apply() }
+    }
+
+    /** Updates the number and the live preview while the slider moves. */
+    private fun showOpacity(percent: Int) {
+        findViewById<TextView>(R.id.gs_opacity_value).text =
+            getString(R.string.hub_gs_opacity_value, percent)
+        val alpha = percent * 255 / 100
+        listOf(R.id.gs_preview_panel, R.id.gs_preview_mini).forEach { id ->
+            val v = findViewById<View>(id)
+            val bg: Drawable = v.background ?: return@forEach
+            v.background = bg.mutate().also { it.alpha = alpha }
+        }
     }
 
     override fun onResume() {
@@ -105,6 +138,17 @@ class HubGameSpaceActivity : HubPageActivity() {
         findViewById<View>(R.id.opt_th_perf).isSelected =
             thermal == GameSpaceSettings.THERMAL_PERFORMANCE
         findViewById<View>(R.id.gs_options).alpha = if (enabled) 1f else 0.55f
+
+        val opacity = GameSpaceSettings.opacity(this)
+        findViewById<SakuraSlider>(R.id.gs_opacity_slider).setValue(opacity)
+        showOpacity(opacity)
+        val pos = GameSpaceSettings.miniPosition(this)
+        findViewById<View>(R.id.opt_pos_left).isSelected = pos == GameSpaceSettings.POS_LEFT
+        findViewById<View>(R.id.opt_pos_right).isSelected = pos == GameSpaceSettings.POS_RIGHT
+        val size = GameSpaceSettings.miniSize(this)
+        findViewById<View>(R.id.opt_size_s).isSelected = size == GameSpaceSettings.SIZE_SMALL
+        findViewById<View>(R.id.opt_size_m).isSelected = size == GameSpaceSettings.SIZE_MEDIUM
+        findViewById<View>(R.id.opt_size_l).isSelected = size == GameSpaceSettings.SIZE_LARGE
 
         refreshGames()
         refreshLastSession()
@@ -159,6 +203,9 @@ class HubGameSpaceActivity : HubPageActivity() {
         val end = prefs.getLong(GameSpaceSettings.KEY_LAST_END, 0L)
         val battery = prefs.getInt(GameSpaceSettings.KEY_LAST_BATTERY, 0)
         val maxTemp = prefs.getInt(GameSpaceSettings.KEY_LAST_MAX_TEMP, Int.MIN_VALUE)
+        val fps = prefs.getInt(GameSpaceSettings.KEY_LAST_FPS, -1)
+        findViewById<TextView>(R.id.gs_last_fps).text =
+            if (fps > 0) fps.toString() else getString(R.string.hub_health_unknown)
 
         findViewById<ImageView>(R.id.gs_last_icon).setImageDrawable(info.loadIcon(packageManager))
         findViewById<TextView>(R.id.gs_last_name).text = info.loadLabel(packageManager)

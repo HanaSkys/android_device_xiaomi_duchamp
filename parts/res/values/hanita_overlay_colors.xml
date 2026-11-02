@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: 2026 HanaSkys
+     SPDX-License-Identifier: Apache-2.0
+-->
+<!-- In-game overlay: always dark so it reads well over any game -->
+<resources>
+    <color name="hub_ov_bg">#FF1A1016</color>
+    <color name="hub_ov_tile">#FF2A1A24</color>
+    <color name="hub_ov_text">#FFFBEAF1</color>
+    <color name="hub_ov_sub">#FFC6A8B6</color>
+    <color name="hub_ov_accent">#FFFF8FB8</color>
+    <color name="hub_ov_on">#FF3D0F24</color>
+    <color name="hub_ov_stroke">#66FF8FB8</color>
+    <color name="hub_ov_shadow">#CC000000</color>
+    <color name="hub_ov_handle">#B3FFFFFF</color>
+</resources>

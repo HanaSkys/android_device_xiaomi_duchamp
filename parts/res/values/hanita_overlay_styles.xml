@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: 2026 HanaSkys
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <style name="HubOverlayValue">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:shadowColor">@color/hub_ov_shadow</item>
+        <item name="android:shadowRadius">4</item>
+        <item name="android:text">—</item>
+        <item name="android:textColor">@color/hub_ov_text</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="HubOverlayLabel">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:shadowColor">@color/hub_ov_shadow</item>
+        <item name="android:shadowRadius">4</item>
+        <item name="android:textColor">@color/hub_ov_sub</item>
+        <item name="android:textSize">10sp</item>
+    </style>
+
+    <style name="HubOverlayTile">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">58dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:background">@drawable/bg_ov_tile</item>
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+        <item name="android:gravity">center</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+
+    <style name="HubOverlayTileIcon">
+        <item name="android:layout_width">22dp</item>
+        <item name="android:layout_height">22dp</item>
+        <item name="android:duplicateParentState">true</item>
+        <item name="android:importantForAccessibility">no</item>
+        <item name="android:tint">@color/hub_ov_tile_fg</item>
+    </style>
+
+    <style name="HubOverlayTileText">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">4dp</item>
+        <item name="android:duplicateParentState">true</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:textColor">@color/hub_ov_tile_text</item>
+        <item name="android:textSize">10sp</item>
+    </style>
+</resources>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: 2026 HanaSkys
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <string name="hub_ov_open_panel">Abrir el panel de Game Space</string>
+    <string name="hub_ov_temp">Temp</string>
+    <string name="hub_ov_t_bypass">Bypass</string>
+    <string name="hub_ov_t_silence">Silencio</string>
+    <string name="hub_ov_t_brightness">Brillo</string>
+    <string name="hub_ov_t_perf">Rendimiento</string>
+    <string name="hub_ov_t_monitor">Monitor</string>
+    <string name="hub_ov_cpu">CPU GHz</string>
+    <string name="hub_ov_gpu">GPU MHz</string>
+    <string name="hub_ov_watts">Watts</string>
+    <string name="hub_gs_section_overlay">Panel en juego</string>
+    <string name="hub_gs_panel_title">Panel lateral</string>
+    <string name="hub_gs_panel_body">Desliza desde el borde izquierdo mientras juegas</string>
+    <string name="hub_gs_mini_title">Monitor mini</string>
+    <string name="hub_gs_mini_body">FPS, temperatura y consumo siempre a la vista</string>
+    <string name="hub_gs_opacity_title">Opacidad</string>
+    <string name="hub_gs_opacity_body">Menos opaco deja ver más el juego</string>
+    <string name="hub_gs_mini_position">Posición del monitor mini</string>
+    <string name="hub_gs_pos_left">Arriba izq.</string>
+    <string name="hub_gs_pos_right">Arriba der.</string>
+    <string name="hub_gs_mini_size">Tamaño del monitor mini</string>
+    <string name="hub_gs_size_small">Pequeño</string>
+    <string name="hub_gs_size_medium">Mediano</string>
+    <string name="hub_gs_size_large">Grande</string>
+    <string name="hub_gs_stat_fps">FPS prom.</string>
+</resources>

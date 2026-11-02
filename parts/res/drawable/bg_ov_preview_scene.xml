@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: 2026 HanaSkys
+     SPDX-License-Identifier: Apache-2.0
+-->
+<!-- A stand-in "game" behind the opacity preview -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="rectangle">
+            <gradient
+                android:angle="270"
+                android:centerColor="#FFC98D6B"
+                android:endColor="#FF3B5A3A"
+                android:startColor="#FF2B4C7E"
+                android:type="linear" />
+            <corners android:radius="18dp" />
+        </shape>
+    </item>
+</layer-list>

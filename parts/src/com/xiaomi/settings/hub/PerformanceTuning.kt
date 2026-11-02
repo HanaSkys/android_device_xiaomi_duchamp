@@ -27,9 +27,7 @@ object PerformanceTuning {
     private const val ZRAM_ALGO_PATH = "/sys/block/zram0/comp_algorithm"
 
     /** Selected TCP algorithm; falls back to what the kernel is using. */
-    fun tcp(): String = SystemProperties.get(PROP_TCP, "").ifEmpty {
-        readFile(TCP_PATH)?.trim()?.takeIf { it == TCP_BBR } ?: TCP_CUBIC
-    }
+    fun tcp(): String = SystemProperties.get(PROP_TCP, "").ifEmpty { TCP_CUBIC }
 
     fun setTcp(value: String) = setProp(PROP_TCP, value)
 

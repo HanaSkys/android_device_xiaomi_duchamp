@@ -28,24 +28,40 @@ import com.xiaomi.settings.utils.FileUtils
 
 /**
  * Watches which app is in the foreground and, while one of the user's games is
- * there, applies the Game Space automations. Every change is recorded before it
- * is made, so it is undone when the game closes, and also on the next start if
- * the process died in the middle of a session.
+ * there, applies the Game Space automations and shows the in-game overlay.
+ * How everything was before the session is recorded first, so it is always put
+ * back when the game closes, and also on the next start if the process died in
+ * the middle of a session.
  */
 class GameSpaceService : Service() {
 
     private val handler = Handler(Looper.getMainLooper())
     private lateinit var prefs: SharedPreferences
+    private lateinit var overlay: GameOverlay
     private var listenerRegistered = false
 
     private var sessionPkg: String? = null
     private var sessionStart = 0L
     private var startLevel = -1
     private var maxTempTenths = Int.MIN_VALUE
+    private var fpsSum = 0L
+    private var fpsCount = 0
 
     private val evaluate = Runnable { evaluateForeground() }
     private val endSession = Runnable { stopSession() }
     private val reapplyThermal = Runnable { applyThermalIfNeeded() }
+    private val poll = object : Runnable {
+        override fun run() {
+            if (sessionPkg == null) return
+            val m = GameMetrics.read(this@GameSpaceService)
+            m.fps?.let { fpsSum += it; fpsCount++ }
+            val tenths = m.tempC?.let { (it * 10).toInt() }
+                ?: BatteryInfo.Snapshot(batteryIntent()).takeIf { it.hasTemp }?.tempTenths
+            tenths?.let { maxTempTenths = maxOf(maxTempTenths, it) }
+            overlay.update(m)
+            handler.postDelayed(this, POLL_MS)
+        }
+    }
 
     private val taskListener = object : TaskStackListener() {
         override fun onTaskStackChanged() {
@@ -55,33 +71,67 @@ class GameSpaceService : Service() {
 
     private val receiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context, intent: Intent) {
-            when (intent.action) {
-                // The thermal auto mode restores its own profile on screen on.
-                Intent.ACTION_SCREEN_ON -> if (sessionPkg != null) {
-                    handler.removeCallbacks(reapplyThermal)
-                    handler.postDelayed(reapplyThermal, THERMAL_REAPPLY_DELAY_MS)
-                }
-                Intent.ACTION_BATTERY_CHANGED -> if (sessionPkg != null) {
-                    val b = BatteryInfo.Snapshot(intent)
-                    if (b.hasTemp) maxTempTenths = maxOf(maxTempTenths, b.tempTenths)
-                }
+            // The thermal auto mode restores its own profile on screen on.
+            if (intent.action == Intent.ACTION_SCREEN_ON && sessionPkg != null) {
+                handler.removeCallbacks(reapplyThermal)
+                handler.postDelayed(reapplyThermal, THERMAL_REAPPLY_DELAY_MS)
             }
         }
     }
 
     private val prefListener = SharedPreferences.OnSharedPreferenceChangeListener { _, key ->
-        if (key == GameSpaceSettings.KEY_ENABLED || key == GameSpaceSettings.KEY_GAMES) {
-            handler.post(evaluate)
+        when (key) {
+            GameSpaceSettings.KEY_ENABLED, GameSpaceSettings.KEY_GAMES -> handler.post(evaluate)
+            GameSpaceSettings.KEY_PANEL, GameSpaceSettings.KEY_MINI,
+            GameSpaceSettings.KEY_OPACITY, GameSpaceSettings.KEY_MINI_POS,
+            GameSpaceSettings.KEY_MINI_SIZE -> handler.post {
+                if (sessionPkg != null) {
+                    overlay.applyStyle()
+                    overlay.refreshTiles()
+                }
+            }
+        }
+    }
+
+    /** What the panel's quick toggles change, live, for this session only. */
+    val overlayActions = object : GameOverlay.Actions {
+        override fun isBypassOn() =
+            Settings.Secure.getInt(contentResolver, ChargeControlService.KEY_BYPASS_GAME, 0) == 1
+        override fun setBypass(on: Boolean) {
+            Settings.Secure.putInt(contentResolver, ChargeControlService.KEY_BYPASS_GAME, if (on) 1 else 0)
+        }
+        override fun isTouchSupported() = HighTouchPolling.isSupported()
+        override fun isTouchOn() = HighTouchPolling.isEnabled(this@GameSpaceService)
+        override fun setTouch(on: Boolean) {
+            HighTouchPolling.setEnabled(this@GameSpaceService, on)
+        }
+        override fun isSilenceOn() = Settings.Global.getInt(contentResolver, HEADS_UP, 1) == 0
+        override fun setSilence(on: Boolean) {
+            Settings.Global.putInt(contentResolver, HEADS_UP, if (on) 0 else 1)
+        }
+        override fun isBrightnessLocked() = brightnessMode() ==
+            Settings.System.SCREEN_BRIGHTNESS_MODE_MANUAL
+        override fun setBrightnessLocked(on: Boolean) {
+            Settings.System.putInt(contentResolver, Settings.System.SCREEN_BRIGHTNESS_MODE,
+                if (on) Settings.System.SCREEN_BRIGHTNESS_MODE_MANUAL
+                else Settings.System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC)
+        }
+        override fun isPerformanceOn() = readThermal() == GameSpaceSettings.THERMAL_PERFORMANCE
+        override fun setPerformance(on: Boolean) {
+            val target = if (on) GameSpaceSettings.THERMAL_PERFORMANCE
+                else prefs.getInt(GameSpaceSettings.KEY_ORIG_THERMAL, -1)
+            if (target > 0) writeThermal(target)
         }
     }
 
     override fun onCreate() {
         super.onCreate()
         prefs = GameSpaceSettings.prefs(this)
-        // A previous session that never ended (crash, reboot): undo what it changed.
+        overlay = GameOverlay(this)
+        // A previous session that never ended (crash, reboot): put everything back.
         if (prefs.contains(GameSpaceSettings.KEY_SESSION_PKG)) {
             Log.i(TAG, "Restoring settings left by an unfinished session")
-            restoreTweaks()
+            restoreOriginals()
         }
         prefs.registerOnSharedPreferenceChangeListener(prefListener)
 
@@ -92,11 +142,7 @@ class GameSpaceService : Service() {
             Log.e(TAG, "Cannot watch the foreground app", e)
         }
 
-        val filter = IntentFilter().apply {
-            addAction(Intent.ACTION_SCREEN_ON)
-            addAction(Intent.ACTION_BATTERY_CHANGED)
-        }
-        registerReceiver(receiver, filter, Context.RECEIVER_NOT_EXPORTED)
+        registerReceiver(receiver, IntentFilter(Intent.ACTION_SCREEN_ON), Context.RECEIVER_NOT_EXPORTED)
         evaluateForeground()
     }
 
@@ -122,6 +168,10 @@ class GameSpaceService : Service() {
 
     override fun onBind(intent: Intent?): IBinder? = null
 
+    fun onOverlayVisibilityChanged() {
+        // Polling runs for the whole session (stats); nothing to change here for now.
+    }
+
     private fun foregroundPackage(): String? = try {
         ActivityTaskManager.getService().getFocusedRootTaskInfo()?.topActivity?.packageName
     } catch (e: Exception) {
@@ -142,7 +192,7 @@ class GameSpaceService : Service() {
                 else -> switchGame(fg!!)
             }
         } else if (sessionPkg != null) {
-            // Short grace period: login dialogs or ads from other apps should not end the session.
+            // Short grace period: our own panel, login dialogs or ads should not end the session.
             handler.removeCallbacks(endSession)
             handler.postDelayed(endSession, if (enabled) EXIT_DELAY_MS else 0L)
         }
@@ -151,9 +201,12 @@ class GameSpaceService : Service() {
     private fun startSession(pkg: String) {
         Log.i(TAG, "Game started: $pkg")
         sessionPkg = pkg
-        prefs.edit().putString(GameSpaceSettings.KEY_SESSION_PKG, pkg).commit()
+        recordOriginals(pkg)
         applyTweaks()
         resetStats()
+        overlay.onSessionStart(labelOf(pkg))
+        handler.removeCallbacks(poll)
+        handler.post(poll)
     }
 
     private fun switchGame(pkg: String) {
@@ -162,95 +215,96 @@ class GameSpaceService : Service() {
         sessionPkg = pkg
         prefs.edit().putString(GameSpaceSettings.KEY_SESSION_PKG, pkg).commit()
         resetStats()
+        overlay.onSessionStart(labelOf(pkg))
     }
 
     private fun stopSession() {
         if (sessionPkg == null) return
         Log.i(TAG, "Game closed: $sessionPkg")
+        handler.removeCallbacks(poll)
+        overlay.onSessionEnd()
         saveStats()
-        restoreTweaks()
+        restoreOriginals()
         sessionPkg = null
+    }
+
+    private fun labelOf(pkg: String): CharSequence = try {
+        packageManager.getApplicationInfo(pkg, 0).loadLabel(packageManager)
+    } catch (e: Exception) {
+        pkg
     }
 
     // --- Automations ---------------------------------------------------------------------------
 
-    /** Records each change (synchronously) before making it. */
+    private fun brightnessMode() = Settings.System.getInt(contentResolver,
+        Settings.System.SCREEN_BRIGHTNESS_MODE, Settings.System.SCREEN_BRIGHTNESS_MODE_MANUAL)
+
+    /** Saved synchronously before anything is changed. */
+    private fun recordOriginals(pkg: String) {
+        val e = prefs.edit()
+            .putString(GameSpaceSettings.KEY_SESSION_PKG, pkg)
+            .putInt(GameSpaceSettings.KEY_ORIG_HEADS_UP,
+                Settings.Global.getInt(contentResolver, HEADS_UP, 1))
+            .putInt(GameSpaceSettings.KEY_ORIG_BRIGHTNESS, brightnessMode())
+        if (HighTouchPolling.isSupported()) {
+            e.putBoolean(GameSpaceSettings.KEY_ORIG_TOUCH, HighTouchPolling.isEnabled(this))
+        }
+        readThermal()?.let { e.putInt(GameSpaceSettings.KEY_ORIG_THERMAL, it) }
+        e.commit()
+    }
+
     private fun applyTweaks() {
-        val cr = contentResolver
-
-        if (GameSpaceSettings.option(this, GameSpaceSettings.KEY_AUTO_BYPASS)) {
-            prefs.edit().putBoolean(GameSpaceSettings.KEY_SET_BYPASS, true).commit()
-            Settings.Secure.putInt(cr, ChargeControlService.KEY_BYPASS_GAME, 1)
-        }
-
+        val a = overlayActions
+        if (GameSpaceSettings.option(this, GameSpaceSettings.KEY_AUTO_BYPASS)) a.setBypass(true)
         if (GameSpaceSettings.option(this, GameSpaceSettings.KEY_AUTO_TOUCH) &&
-            HighTouchPolling.isSupported() && !HighTouchPolling.isEnabled(this)
-        ) {
-            prefs.edit().putBoolean(GameSpaceSettings.KEY_SET_TOUCH, true).commit()
-            if (!HighTouchPolling.setEnabled(this, true)) {
-                prefs.edit().remove(GameSpaceSettings.KEY_SET_TOUCH).commit()
-            }
-        }
-
-        if (GameSpaceSettings.option(this, GameSpaceSettings.KEY_NO_HEADS_UP)) {
-            val prev = Settings.Global.getInt(cr, HEADS_UP, 1)
-            if (prev != 0) {
-                prefs.edit().putInt(GameSpaceSettings.KEY_PREV_HEADS_UP, prev).commit()
-                Settings.Global.putInt(cr, HEADS_UP, 0)
-            }
-        }
-
-        if (GameSpaceSettings.option(this, GameSpaceSettings.KEY_LOCK_BRIGHTNESS)) {
-            val mode = Settings.System.getInt(cr, Settings.System.SCREEN_BRIGHTNESS_MODE,
-                Settings.System.SCREEN_BRIGHTNESS_MODE_MANUAL)
-            if (mode == Settings.System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC) {
-                prefs.edit().putBoolean(GameSpaceSettings.KEY_SET_BRIGHTNESS, true).commit()
-                Settings.System.putInt(cr, Settings.System.SCREEN_BRIGHTNESS_MODE,
-                    Settings.System.SCREEN_BRIGHTNESS_MODE_MANUAL)
-            }
-        }
-
-        val thermal = GameSpaceSettings.thermal(this)
-        if (thermal != GameSpaceSettings.THERMAL_KEEP) {
-            val current = readThermal()
-            if (current != null && current != thermal) {
-                prefs.edit().putInt(GameSpaceSettings.KEY_PREV_THERMAL, current).commit()
-                writeThermal(thermal)
-            }
-        }
+            a.isTouchSupported() && !a.isTouchOn()) a.setTouch(true)
+        if (GameSpaceSettings.option(this, GameSpaceSettings.KEY_NO_HEADS_UP)) a.setSilence(true)
+        if (GameSpaceSettings.option(this, GameSpaceSettings.KEY_LOCK_BRIGHTNESS) &&
+            !a.isBrightnessLocked()) a.setBrightnessLocked(true)
+        applyThermalIfNeeded()
     }
 
     private fun applyThermalIfNeeded() {
-        if (sessionPkg == null || !prefs.contains(GameSpaceSettings.KEY_PREV_THERMAL)) return
+        if (sessionPkg == null) return
         val thermal = GameSpaceSettings.thermal(this)
         if (thermal != GameSpaceSettings.THERMAL_KEEP && readThermal() != thermal) {
             writeThermal(thermal)
         }
     }
 
-    /** Undoes exactly what applyTweaks() recorded, then forgets it. */
-    private fun restoreTweaks() {
+    /** Puts back what recordOriginals() saved, then forgets it. */
+    private fun restoreOriginals() {
         handler.removeCallbacks(reapplyThermal)
         val cr = contentResolver
 
-        if (prefs.getBoolean(GameSpaceSettings.KEY_SET_BYPASS, false)) {
-            Settings.Secure.putInt(cr, ChargeControlService.KEY_BYPASS_GAME, 0)
+        // Bypass for games is only ever ours: always off outside a session.
+        Settings.Secure.putInt(cr, ChargeControlService.KEY_BYPASS_GAME, 0)
+
+        if (prefs.contains(GameSpaceSettings.KEY_ORIG_TOUCH)) {
+            val orig = prefs.getBoolean(GameSpaceSettings.KEY_ORIG_TOUCH, false)
+            if (HighTouchPolling.isSupported() && HighTouchPolling.isEnabled(this) != orig) {
+                HighTouchPolling.setEnabled(this, orig)
+            }
+        } else if (prefs.getBoolean("session_set_touch", false)) {
+            HighTouchPolling.setEnabled(this, false) // left by a phase 1 session
         }
-        if (prefs.getBoolean(GameSpaceSettings.KEY_SET_TOUCH, false)) {
-            HighTouchPolling.setEnabled(this, false)
-        }
-        val prevHeadsUp = prefs.getInt(GameSpaceSettings.KEY_PREV_HEADS_UP, -1)
-        if (prevHeadsUp >= 0) {
-            Settings.Global.putInt(cr, HEADS_UP, prevHeadsUp)
-        }
-        if (prefs.getBoolean(GameSpaceSettings.KEY_SET_BRIGHTNESS, false)) {
+
+        val headsUp = prefs.getInt(GameSpaceSettings.KEY_ORIG_HEADS_UP,
+            prefs.getInt("session_prev_heads_up", -1))
+        if (headsUp >= 0) Settings.Global.putInt(cr, HEADS_UP, headsUp)
+
+        if (prefs.contains(GameSpaceSettings.KEY_ORIG_BRIGHTNESS)) {
+            Settings.System.putInt(cr, Settings.System.SCREEN_BRIGHTNESS_MODE,
+                prefs.getInt(GameSpaceSettings.KEY_ORIG_BRIGHTNESS,
+                    Settings.System.SCREEN_BRIGHTNESS_MODE_MANUAL))
+        } else if (prefs.getBoolean("session_set_brightness", false)) {
             Settings.System.putInt(cr, Settings.System.SCREEN_BRIGHTNESS_MODE,
                 Settings.System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC)
         }
-        val prevThermal = prefs.getInt(GameSpaceSettings.KEY_PREV_THERMAL, -1)
-        if (prevThermal > 0) {
-            writeThermal(prevThermal)
-        }
+
+        val thermal = prefs.getInt(GameSpaceSettings.KEY_ORIG_THERMAL,
+            prefs.getInt("session_prev_thermal", -1))
+        if (thermal > 0 && readThermal() != thermal) writeThermal(thermal)
 
         val editor = prefs.edit()
         GameSpaceSettings.SESSION_KEYS.forEach { editor.remove(it) }
@@ -277,27 +331,29 @@ class GameSpaceService : Service() {
 
     // --- Session summary -----------------------------------------------------------------------
 
-    private fun batteryNow() = BatteryInfo.Snapshot(
-        registerReceiver(null, IntentFilter(Intent.ACTION_BATTERY_CHANGED)))
+    private fun batteryIntent() = registerReceiver(null, IntentFilter(Intent.ACTION_BATTERY_CHANGED))
 
     private fun resetStats() {
-        val b = batteryNow()
+        val b = BatteryInfo.Snapshot(batteryIntent())
         sessionStart = SystemClock.elapsedRealtime()
         startLevel = b.level
-        maxTempTenths = if (b.hasTemp) b.tempTenths else Int.MIN_VALUE
+        maxTempTenths = Int.MIN_VALUE
+        fpsSum = 0L
+        fpsCount = 0
     }
 
     private fun saveStats() {
         val pkg = sessionPkg ?: return
         val duration = SystemClock.elapsedRealtime() - sessionStart
         if (duration < MIN_SESSION_MS) return
-        val b = batteryNow()
+        val b = BatteryInfo.Snapshot(batteryIntent())
         prefs.edit()
             .putString(GameSpaceSettings.KEY_LAST_PKG, pkg)
             .putLong(GameSpaceSettings.KEY_LAST_END, System.currentTimeMillis())
             .putLong(GameSpaceSettings.KEY_LAST_DURATION, duration)
             .putInt(GameSpaceSettings.KEY_LAST_BATTERY, b.level - startLevel)
             .putInt(GameSpaceSettings.KEY_LAST_MAX_TEMP, maxTempTenths)
+            .putInt(GameSpaceSettings.KEY_LAST_FPS, if (fpsCount > 0) (fpsSum / fpsCount).toInt() else -1)
             .apply()
     }
 
@@ -307,6 +363,7 @@ class GameSpaceService : Service() {
         private const val EXIT_DELAY_MS = 2_000L
         private const val THERMAL_REAPPLY_DELAY_MS = 1_500L
         private const val MIN_SESSION_MS = 60_000L
+        private const val POLL_MS = 1_000L
 
         fun start(context: Context) {
             context.startService(Intent(context, GameSpaceService::class.java))

@@ -24,21 +24,37 @@ object GameSpaceSettings {
     const val KEY_LOCK_BRIGHTNESS = "lock_brightness"
     const val KEY_THERMAL = "thermal_profile"
 
+    // In-game overlay
+    const val KEY_PANEL = "overlay_panel"
+    const val KEY_MINI = "overlay_mini"
+    const val KEY_OPACITY = "overlay_opacity"
+    const val KEY_MINI_POS = "overlay_mini_pos"
+    const val KEY_MINI_SIZE = "overlay_mini_size"
+    const val OPACITY_MIN = 20
+    const val OPACITY_MAX = 100
+    const val OPACITY_DEFAULT = 70
+    const val POS_LEFT = 0
+    const val POS_RIGHT = 1
+    const val SIZE_SMALL = 0
+    const val SIZE_MEDIUM = 1
+    const val SIZE_LARGE = 2
+
     /** sconfig values, same ones the thermal profiles of XiaomiParts use. */
     const val THERMAL_KEEP = 0
     const val THERMAL_GAME = 19
     const val THERMAL_PERFORMANCE = 18
 
-    // What the running session changed, so it can always be undone (even after a crash).
+    // How things were before the session, so they can always be put back (even after a crash).
     const val KEY_SESSION_PKG = "session_pkg"
-    const val KEY_SET_BYPASS = "session_set_bypass"
-    const val KEY_SET_TOUCH = "session_set_touch"
-    const val KEY_PREV_HEADS_UP = "session_prev_heads_up"
-    const val KEY_SET_BRIGHTNESS = "session_set_brightness"
-    const val KEY_PREV_THERMAL = "session_prev_thermal"
+    const val KEY_ORIG_TOUCH = "session_orig_touch"
+    const val KEY_ORIG_HEADS_UP = "session_orig_heads_up"
+    const val KEY_ORIG_BRIGHTNESS = "session_orig_brightness"
+    const val KEY_ORIG_THERMAL = "session_orig_thermal"
     val SESSION_KEYS = listOf(
-        KEY_SESSION_PKG, KEY_SET_BYPASS, KEY_SET_TOUCH,
-        KEY_PREV_HEADS_UP, KEY_SET_BRIGHTNESS, KEY_PREV_THERMAL,
+        KEY_SESSION_PKG, KEY_ORIG_TOUCH, KEY_ORIG_HEADS_UP, KEY_ORIG_BRIGHTNESS, KEY_ORIG_THERMAL,
+        // Phase 1 keys: still cleared so an old unfinished session cannot linger.
+        "session_set_bypass", "session_set_touch", "session_prev_heads_up",
+        "session_set_brightness", "session_prev_thermal",
     )
 
     // Last finished session
@@ -47,6 +63,7 @@ object GameSpaceSettings {
     const val KEY_LAST_DURATION = "last_duration_ms"
     const val KEY_LAST_BATTERY = "last_battery_delta"
     const val KEY_LAST_MAX_TEMP = "last_max_temp_tenths"
+    const val KEY_LAST_FPS = "last_fps_avg"
 
     fun prefs(context: Context): SharedPreferences =
         context.createDeviceProtectedStorageContext()
@@ -64,11 +81,18 @@ object GameSpaceSettings {
     fun option(context: Context, key: String) = prefs(context).getBoolean(key, defaultFor(key))
 
     fun defaultFor(key: String) = when (key) {
-        KEY_AUTO_BYPASS, KEY_AUTO_TOUCH, KEY_NO_HEADS_UP -> true
+        KEY_AUTO_BYPASS, KEY_AUTO_TOUCH, KEY_NO_HEADS_UP, KEY_PANEL -> true
         else -> false
     }
 
     fun thermal(context: Context) = prefs(context).getInt(KEY_THERMAL, THERMAL_PERFORMANCE)
+
+    fun opacity(context: Context) = prefs(context).getInt(KEY_OPACITY, OPACITY_DEFAULT)
+        .coerceIn(OPACITY_MIN, OPACITY_MAX)
+
+    fun miniPosition(context: Context) = prefs(context).getInt(KEY_MINI_POS, POS_LEFT)
+
+    fun miniSize(context: Context) = prefs(context).getInt(KEY_MINI_SIZE, SIZE_MEDIUM)
 
     /** "On · 3 games" / "Off", for the Hub. */
     fun summary(context: Context): String {

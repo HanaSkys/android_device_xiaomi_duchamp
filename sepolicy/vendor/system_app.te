@@ -18,3 +18,7 @@ allow system_app vendor_sysfs_corecontrol:file rw_file_perms;
 # High touch polling rate (re-applied by XiaomiParts after screen on)
 allow system_app vendor_sysfs_touch:dir search;
 allow system_app vendor_sysfs_touch:file { getattr w_file_perms };
+
+# Hanita Mods Game Space: read-only game metrics (FPS/GPU from GED, skin temperature)
+r_dir_file(system_app, sysfs_ged)
+r_dir_file(system_app, sysfs_therm)
