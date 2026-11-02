@@ -146,6 +146,11 @@ include device/mediatek/sepolicy_vndr/SEPolicy.mk
 BOARD_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy/vendor
 SYSTEM_EXT_PRIVATE_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy/private
 
+# Hanita: SELinux policy for adb_root on userdebug builds (LineageOS only adds it on eng)
+ifeq ($(TARGET_BUILD_VARIANT),userdebug)
+SYSTEM_EXT_PRIVATE_SEPOLICY_DIRS += device/lineage/sepolicy/common/private/adbroot_debug
+endif
+
 # Verified Boot
 BOARD_AVB_ENABLE := true
 BOARD_AVB_KEY_PATH := external/avb/test/data/testkey_rsa4096.pem

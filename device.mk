@@ -419,3 +419,8 @@ $(call inherit-product, packages/apps/GameBar/gamebar.mk)
 
 # MiuiCamera
 $(call inherit-product-if-exists, vendor/xiaomi/duchamp-miuicamera/miuicamera.mk)
+
+# Hanita: rooted debugging (adb root) on development builds;
+# LineageOS now only ships adb_root on eng builds.
+PRODUCT_PACKAGES_DEBUG += \
+    adb_root
