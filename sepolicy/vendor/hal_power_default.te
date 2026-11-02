@@ -1,0 +1,3 @@
+
+# ADPF: let the power HAL set uclamp on hint session threads
+allow hal_power_default self:capability sys_nice;
