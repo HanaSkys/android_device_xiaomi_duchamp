@@ -68,7 +68,7 @@ object GameSpaceSettings {
         else -> false
     }
 
-    fun thermal(context: Context) = prefs(context).getInt(KEY_THERMAL, THERMAL_GAME)
+    fun thermal(context: Context) = prefs(context).getInt(KEY_THERMAL, THERMAL_PERFORMANCE)
 
     /** "On · 3 games" / "Off", for the Hub. */
     fun summary(context: Context): String {

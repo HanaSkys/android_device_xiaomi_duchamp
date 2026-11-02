@@ -22,7 +22,7 @@
     <string name="hub_gs_brightness_title">Lock brightness</string>
     <string name="hub_gs_brightness_body">Turns off adaptive brightness</string>
     <string name="hub_gs_thermal_title">Thermal profile</string>
-    <string name="hub_gs_thermal_body">Applied while you play</string>
+    <string name="hub_gs_thermal_body">Performance unlocks the full CPU · Game runs cooler but limits it</string>
     <string name="hub_gs_th_keep">No change</string>
     <string name="hub_gs_th_game">Game</string>
     <string name="hub_gs_th_perf">Performance</string>
