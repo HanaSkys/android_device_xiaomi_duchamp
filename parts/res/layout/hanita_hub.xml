@@ -185,35 +185,14 @@
                 <TextView android:id="@+id/cat_performance_status" style="@style/HubCategoryStatus" />
             </LinearLayout>
 
-            <!-- Game Space: coming soon -->
             <LinearLayout
                 android:id="@+id/cat_game"
                 style="@style/HubCategory"
-                android:layout_marginStart="6dp"
-                android:alpha="0.7"
-                android:clickable="false"
-                android:focusable="false">
+                android:layout_marginStart="6dp">
                 <ImageView style="@style/HubCategoryIcon" android:src="@drawable/ic_hub_game" />
                 <Space style="@style/HubCategorySpace" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        style="@style/HubCategoryTitle"
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:ellipsize="end"
-                        android:maxLines="1"
-                        android:text="@string/hub_cat_game" />
-
-                    <TextView style="@style/HubBadge" android:text="@string/hub_badge_soon" />
-                </LinearLayout>
-
-                <TextView style="@style/HubCategoryStatus" android:text="@string/hub_cat_game_summary" />
+                <TextView style="@style/HubCategoryTitle" android:text="@string/hub_cat_game" />
+                <TextView android:id="@+id/cat_game_status" style="@style/HubCategoryStatus" />
             </LinearLayout>
         </LinearLayout>
 

@@ -17,6 +17,7 @@ import android.widget.TextView
 import android.widget.Toast
 import com.xiaomi.settings.R
 import com.xiaomi.settings.batteryhealth.ChargeControlService
+import com.xiaomi.settings.gamespace.GameSpaceSettings
 import com.xiaomi.settings.touch.HighTouchPolling
 
 /**
@@ -40,6 +41,7 @@ class HanitaHubActivity : HubPageActivity() {
     private lateinit var catBattery: TextView
     private lateinit var catDisplay: TextView
     private lateinit var catPerformance: TextView
+    private lateinit var catGame: TextView
 
     private val batteryReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context, intent: Intent) {
@@ -68,6 +70,7 @@ class HanitaHubActivity : HubPageActivity() {
         catBattery = findViewById(R.id.cat_battery_status)
         catDisplay = findViewById(R.id.cat_display_status)
         catPerformance = findViewById(R.id.cat_performance_status)
+        catGame = findViewById(R.id.cat_game_status)
 
         bindQuick(quickBypass) { putSecure(ChargeControlService.KEY_BYPASS, it) }
         bindQuick(quickSmart) { putSecure(ChargeControlService.KEY_SMART, it) }
@@ -83,6 +86,7 @@ class HanitaHubActivity : HubPageActivity() {
         bindCategory(R.id.cat_battery, HubBatteryActivity::class.java)
         bindCategory(R.id.cat_display, HubDisplayActivity::class.java)
         bindCategory(R.id.cat_performance, HubPerformanceActivity::class.java)
+        bindCategory(R.id.cat_game, HubGameSpaceActivity::class.java)
     }
 
     override fun onResume() {
@@ -171,6 +175,8 @@ class HanitaHubActivity : HubPageActivity() {
 
         catPerformance.text = listOf(tcp, PerformanceTuning.zram())
             .joinToString(SEPARATOR) { it.uppercase() }
+
+        catGame.text = GameSpaceSettings.summary(this)
     }
 
     companion object {

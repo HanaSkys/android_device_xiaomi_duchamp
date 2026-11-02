@@ -243,7 +243,6 @@ PRODUCT_PACKAGES += \
     DuchampSettingsOverlay \
     DuchampSettingsProviderOverlayPoco \
     DuchampSettingsProviderOverlayRedmi \
-    DuchampGameBarOverlay \
     DuchampMaintainerOverlay \
     DuchampSystemUIOverlay \
     DuchampWifiOverlay
@@ -414,8 +413,6 @@ $(call inherit-product, vendor/xiaomi/duchamp/duchamp-vendor.mk)
 # Inherit Dolby
 $(call inherit-product, hardware/dolby/dolby.mk)
 
-# GameBar
-$(call inherit-product, packages/apps/GameBar/gamebar.mk)
 
 # MiuiCamera
 $(call inherit-product-if-exists, vendor/xiaomi/duchamp-miuicamera/miuicamera.mk)

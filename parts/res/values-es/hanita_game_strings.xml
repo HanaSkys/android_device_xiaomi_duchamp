@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: 2026 HanaSkys
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <string name="hub_gs_subtitle">Se activa solo al abrir tus juegos</string>
+    <string name="hub_gs_no_games">Agrega tus juegos para empezar</string>
+    <plurals name="hub_gs_games_count">
+        <item quantity="one">%d juego</item>
+        <item quantity="other">%d juegos</item>
+    </plurals>
+    <string name="hub_gs_section_games">Mis juegos</string>
+    <string name="hub_gs_add">Agregar</string>
+    <string name="hub_gs_section_auto">Al abrir un juego</string>
+    <string name="hub_gs_bypass_title">Bypass automático</string>
+    <string name="hub_gs_bypass_body">Si está conectado, carga sin calentar</string>
+    <string name="hub_gs_touch_title">Touch+ automático</string>
+    <string name="hub_gs_touch_body">Respuesta táctil al máximo</string>
+    <string name="hub_gs_headsup_title">Sin interrupciones</string>
+    <string name="hub_gs_headsup_body">Oculta las notificaciones flotantes</string>
+    <string name="hub_gs_brightness_title">Bloquear brillo</string>
+    <string name="hub_gs_brightness_body">Desactiva el brillo automático</string>
+    <string name="hub_gs_thermal_title">Perfil térmico</string>
+    <string name="hub_gs_thermal_body">Se aplica mientras juegas</string>
+    <string name="hub_gs_th_keep">Sin cambio</string>
+    <string name="hub_gs_th_game">Juego</string>
+    <string name="hub_gs_th_perf">Rendimiento</string>
+    <string name="hub_gs_section_last">Última sesión</string>
+    <string name="hub_gs_stat_duration">Duración</string>
+    <string name="hub_gs_stat_battery">Batería</string>
+    <string name="hub_gs_stat_max_temp">Temp. máx.</string>
+    <string name="hub_gs_picker_title">Elegir juegos</string>
+    <string name="hub_gs_picker_sub">Game Space se activa al abrir alguno de estos</string>
+    <string name="hub_gs_loading">Cargando apps…</string>
+    <string name="hub_gs_is_game">Juego</string>
+</resources>

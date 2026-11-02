@@ -68,6 +68,9 @@ class BootCompletedReceiver : BroadcastReceiver() {
 
         // High touch polling rate (re-apply after screen on)
         context.startService(Intent(context, com.xiaomi.settings.touch.HighTouchPollingService::class.java))
+
+        // Hanita Mods: Game Space (also undoes a session left open by a crash)
+        com.xiaomi.settings.gamespace.GameSpaceService.start(context)
     }
 
     private fun restoreThermalProfile(context: Context) {

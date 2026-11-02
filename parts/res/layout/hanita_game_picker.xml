@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: 2026 HanaSkys
+     SPDX-License-Identifier: Apache-2.0
+-->
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/hub_scroll"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/hub_bg"
+    android:clipToPadding="false"
+    android:overScrollMode="ifContentScrolls">
+
+    <LinearLayout
+        android:id="@+id/hub_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        android:orientation="vertical"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:paddingBottom="24dp">
+
+        <ImageButton android:id="@+id/hub_back" style="@style/HubBack" />
+
+        <TextView style="@style/HubPageTitle" android:text="@string/hub_gs_picker_title" />
+
+        <TextView style="@style/HubPageSubtitle" android:text="@string/hub_gs_picker_sub" />
+
+        <TextView
+            android:id="@+id/picker_loading"
+            style="@style/HubCardBody"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="24dp"
+            android:text="@string/hub_gs_loading" />
+
+        <LinearLayout
+            android:id="@+id/picker_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_hub_card"
+            android:orientation="vertical"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:visibility="gone" />
+    </LinearLayout>
+</ScrollView>

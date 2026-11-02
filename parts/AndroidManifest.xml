@@ -11,6 +11,9 @@
 
     <uses-permission android:name="android.permission.INTERACT_ACROSS_USERS_FULL" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.MANAGE_ACTIVITY_TASKS" />
+    <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES" />
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
     <uses-permission android:name="android.permission.ACCESS_SURFACE_FLINGER" />
 
     <uses-permission android:name="lineageos.permission.WRITE_SETTINGS" />
@@ -174,6 +177,21 @@
             android:exported="false"
             android:label="@string/hub_section_performance"
             android:theme="@style/Theme.HanitaHub" />
+
+        <!-- Hanita Mods: Game Space -->
+        <activity
+            android:name=".hub.HubGameSpaceActivity"
+            android:exported="false"
+            android:label="@string/hub_cat_game"
+            android:theme="@style/Theme.HanitaHub" />
+        <activity
+            android:name=".hub.GamePickerActivity"
+            android:exported="false"
+            android:label="@string/hub_gs_picker_title"
+            android:theme="@style/Theme.HanitaHub" />
+        <service
+            android:name=".gamespace.GameSpaceService"
+            android:exported="false" />
 
         <!-- Hanita Mods: screen resolution -->
         <activity
